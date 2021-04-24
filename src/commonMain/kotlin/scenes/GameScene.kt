@@ -4,17 +4,15 @@ import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.Graphics
 import com.soywiz.korge.view.graphics
+import com.soywiz.korge.view.xy
 import com.soywiz.korim.color.Colors
 import com.soywiz.korma.geom.Point
 import com.soywiz.korma.geom.Rectangle
 import com.soywiz.korma.geom.vector.circle
 import com.soywiz.korma.geom.vector.rect
 import components.HorizontalKeyMovementComponent
-import components.StayOnShelfComponent
-import views.Platform
-import views.Player
-import views.TreeObject
-import views.addLetter
+import components.putOnShelf
+import views.*
 
 class GameScene() : Scene() {
     lateinit var player: Player
@@ -23,17 +21,22 @@ class GameScene() : Scene() {
     override suspend fun Container.sceneInit() {
         addBackground()
 
+        val backpack = BackpackUI()
+        backpack.xy(40.0, 40.0)
+        addChild(backpack)
+        backpack.addLetter(Letter('?'))
+
         platform = Platform(Rectangle.fromBounds(0, views.virtualHeight * 3/4, views.virtualWidth, views.virtualHeight))
         addChild(platform)
 
         val tree = TreeObject()
         tree.x = 50.0
-        addComponent(StayOnShelfComponent(tree, platform))
+        putOnShelf(tree, platform)
         addChild(tree)
 
         player = Player()
         player.x = 50.0
-        addComponent(StayOnShelfComponent(player, platform))
+        putOnShelf(player, platform)
         addComponent(HorizontalKeyMovementComponent(player))
         addChild(player)
 

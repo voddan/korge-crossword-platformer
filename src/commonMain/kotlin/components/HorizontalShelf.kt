@@ -1,5 +1,7 @@
 package components
 
+import com.soywiz.korge.view.Container
+import com.soywiz.korge.view.View
 import com.soywiz.korma.geom.shape.Shape2d
 import com.soywiz.korma.geom.shape.bounds
 import com.soywiz.korma.geom.shape.buildPath
@@ -30,4 +32,8 @@ interface HorizontalShelf {
         val intersect = shape2d.intersection(cutLine)
         return intersect.bounds.top
     }
+}
+
+fun Container.putOnShelf(view: View, shelf: HorizontalShelf) {
+    view.y = shelf.positionY(view.x)
 }
