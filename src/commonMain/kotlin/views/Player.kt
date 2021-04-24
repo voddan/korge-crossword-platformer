@@ -12,6 +12,8 @@ import com.soywiz.korma.geom.vector.circle
 import com.soywiz.korma.geom.vector.rect
 
 class Player(val platform: Platform) : Container() {
+    val horizontalSpeed = 5.0
+
     init {
         graphics {
             fill(Colors.RED) {
@@ -34,8 +36,8 @@ class PlayerKeyboardControls(val player: Player, val platform: Platform) : KeyCo
     }
 
     override fun Views.onKeyEvent(event: KeyEvent) {
-        if(input.keys[Key.RIGHT]) player.x += 1
-        if(input.keys[Key.LEFT]) player.x -= 1
+        if(input.keys[Key.RIGHT]) player.x += player.horizontalSpeed
+        if(input.keys[Key.LEFT]) player.x -= player.horizontalSpeed
 
         player.y = platform.topPositionY(player.x)
     }

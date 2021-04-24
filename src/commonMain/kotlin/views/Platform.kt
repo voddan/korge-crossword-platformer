@@ -26,8 +26,8 @@ class Platform(val rect: Rectangle) : Container() {
             rLineToH(span / 3)
             rLineToV(step)
             rLineToH(span / 3)
-            rLineToV(- step)
-            rLineToH(span / 3)
+//            rLineToV(- step)
+//            rLineToH(span / 3)
         }
 
         shape = buildPath {
