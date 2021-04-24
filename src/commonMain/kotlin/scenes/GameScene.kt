@@ -9,6 +9,9 @@ import com.soywiz.korma.geom.Point
 import com.soywiz.korma.geom.Rectangle
 import com.soywiz.korma.geom.vector.circle
 import com.soywiz.korma.geom.vector.rect
+import components.HorizontalKeyMovementComponent
+import components.StayOnTopComponent
+import views.Letter
 import views.Platform
 import views.Player
 
@@ -22,9 +25,22 @@ class GameScene() : Scene() {
         platform = Platform(Rectangle.fromBounds(0, views.virtualHeight * 3/4, views.virtualWidth, views.virtualHeight))
         addChild(platform)
 
-        player = Player(platform)
+        player = Player()
         player.x = 50.0
+        addComponent(StayOnTopComponent(player, platform))
+        addComponent(HorizontalKeyMovementComponent(player))
         addChild(player)
+
+        addLetter('A', 300.0)
+        addLetter('B', 350.0)
+    }
+
+    fun Container.addLetter(value: Char, posX: Double): Letter {
+        val letter = Letter(value)
+        letter.x = posX
+        addComponent(StayOnTopComponent(letter, platform))
+        addChild(letter)
+        return letter
     }
 
     fun Container.addBackground() {
