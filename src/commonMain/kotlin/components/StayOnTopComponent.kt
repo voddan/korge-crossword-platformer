@@ -7,6 +7,6 @@ import views.Platform
 
 class StayOnTopComponent(override val view: View, val onToOf: Platform) : UpdateComponent {
     override fun update(dt: TimeSpan) {
-        view.y = onToOf.topPositionY(view.x)
+        view.y = onToOf.positionY(view.x)
     }
 }
