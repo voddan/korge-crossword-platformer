@@ -24,7 +24,6 @@ class GameScene() : Scene() {
 
         player = Player(platform)
         player.x = 50.0
-        player.y = platform.topPositionY(player.x)
         addChild(player)
     }
 

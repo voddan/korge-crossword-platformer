@@ -1,15 +1,12 @@
 package views
 
-import com.soywiz.korev.Key
-import com.soywiz.korev.KeyEvent
-import com.soywiz.korge.baseview.BaseView
-import com.soywiz.korge.component.KeyComponent
 import com.soywiz.korge.view.Container
-import com.soywiz.korge.view.Views
 import com.soywiz.korge.view.graphics
 import com.soywiz.korim.color.Colors
 import com.soywiz.korma.geom.vector.circle
 import com.soywiz.korma.geom.vector.rect
+import components.HorizontalKeyMovementComponent
+import components.StayOnTopComponent
 
 class Player(val platform: Platform) : Container() {
     val horizontalSpeed = 5.0
@@ -24,21 +21,7 @@ class Player(val platform: Platform) : Container() {
             }
         }
 
-        addComponent(PlayerKeyboardControls(this, platform))
-    }
-}
-
-class PlayerKeyboardControls(val player: Player, val platform: Platform) : KeyComponent {
-    override val view: BaseView = player
-
-    init {
-        player.y = platform.topPositionY(player.x)
-    }
-
-    override fun Views.onKeyEvent(event: KeyEvent) {
-        if(input.keys[Key.RIGHT]) player.x += player.horizontalSpeed
-        if(input.keys[Key.LEFT]) player.x -= player.horizontalSpeed
-
-        player.y = platform.topPositionY(player.x)
+        addComponent(StayOnTopComponent(this, platform))
+        addComponent(HorizontalKeyMovementComponent(this))
     }
 }
