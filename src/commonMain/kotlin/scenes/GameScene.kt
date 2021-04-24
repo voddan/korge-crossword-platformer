@@ -22,7 +22,9 @@ class GameScene() : Scene() {
         platform = Platform(Rectangle.fromBounds(0, views.virtualHeight * 3/4, views.virtualWidth, views.virtualHeight))
         addChild(platform)
 
-        player = Player()
+        player = Player(platform)
+        player.x = 50.0
+        player.y = platform.topPositionY(player.x)
         addChild(player)
     }
 

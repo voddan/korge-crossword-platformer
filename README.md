@@ -20,13 +20,12 @@ To run natively on Windows, Linux or MacOS follow those
 ## Implementation Plan
 
  - [x] 0.1: Game runs on JVM, JS and natively.
- - [ ] 0.2: Player moves left-right and interacts with platforms.
- - [ ] 0.3: Player experiences gravity and can jump.
- - [ ] 0.4: Player can collect letters. Collected letters are displayed in UI.
- - [ ] 0.5: Objects with letters disappear as their letters get collected.
- - [ ] 0.6: Objects reappear if correct letters are put into their slots.
- - [ ] 0.7: Player can interact with an appeared object  
- - [ ] 0.8: One game level with 3 objects and 2-3 obstacles
+ - [x] 0.2: Player moves left-right and interacts with platforms.
+ - [ ] 0.3: Player can collect letters. Collected letters are displayed in UI.
+ - [ ] 0.4: Objects with letters disappear as their letters get collected.
+ - [ ] 0.5: Objects reappear if correct letters are put into their slots.
+ - [ ] 0.6: Player can interact with an appeared object  
+ - [ ] 0.7: One game level with 3 objects and 2-3 obstacles
  - [ ] **1.0**: 1st game level is deployed to [itch.io](https://itch.io/) to get feedback
  - 1.+: menu, 2nd level, basic animations
  - 2.+: 3rd level, detailed assets, sounds, polished animations
