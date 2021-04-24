@@ -3,10 +3,9 @@ package components
 import com.soywiz.klock.TimeSpan
 import com.soywiz.korge.component.UpdateComponent
 import com.soywiz.korge.view.View
-import views.Platform
 
-class StayOnTopComponent(override val view: View, val onToOf: Platform) : UpdateComponent {
+class StayOnShelfComponent(override val view: View, val shelf: HorizontalShelf) : UpdateComponent {
     override fun update(dt: TimeSpan) {
-        view.y = onToOf.positionY(view.x)
+        view.y = shelf.positionY(view.x)
     }
 }

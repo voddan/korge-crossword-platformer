@@ -7,9 +7,11 @@ import com.soywiz.korge.view.text
 import com.soywiz.korim.color.Colors
 import com.soywiz.korma.geom.Point
 import com.soywiz.korma.geom.vector.circle
+import components.HorizontalShelf
+import components.StayOnShelfComponent
 
 class Letter(val value: Char) : Container() {
-    val boxSize = 30.0
+    val boxSize = 20.0
 
     init {
         graphics {
@@ -26,4 +28,12 @@ class Letter(val value: Char) : Container() {
             }
         }
     }
+}
+
+fun Container.addLetter(value: Char, posX: Double, shelf: HorizontalShelf): Letter {
+    val letter = Letter(value)
+    letter.x = posX
+    addComponent(StayOnShelfComponent(letter, shelf))
+    addChild(letter)
+    return letter
 }
