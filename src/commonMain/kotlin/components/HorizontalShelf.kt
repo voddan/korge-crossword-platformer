@@ -17,11 +17,11 @@ interface HorizontalShelf {
     private fun rect() = positionLine.getBounds()
 
     private fun shape() = buildPath {
+        val bottomMargin = 10  // To have some height when the last line is the bottom
         val rect = rect()
-        val bottomMargine = 10  // To have some height when the last line is the bottom
         path(positionLine)
-        lineToV(rect.bottom + bottomMargine)
-        lineTo(rect.left, rect.bottom + bottomMargine)
+        lineToV(rect.bottom + bottomMargin)
+        lineTo(rect.left, rect.bottom + bottomMargin)
         close()
     }
 

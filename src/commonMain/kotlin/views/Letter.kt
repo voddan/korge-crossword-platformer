@@ -11,13 +11,15 @@ import components.HorizontalShelf
 import components.putOnShelf
 
 class Letter(val value: Char) : Container() {
-    val boxSize = 20.0
+    companion object const {
+        const val SIZE = 20.0
+    }
 
     init {
         graphics {
-            solidRect(boxSize, boxSize, color = Colors.LIGHTYELLOW)
-            text("$value", color = Colors["#c22aff"], textSize = boxSize) {
-                pos = Point(0.2, -0.1) * boxSize
+            solidRect(SIZE, SIZE, color = Colors.LIGHTYELLOW)
+            text("$value", color = Colors["#c22aff"], textSize = SIZE) {
+                pos = Point(0.2, -0.1) * SIZE
             }
         }
 

@@ -7,7 +7,9 @@ import com.soywiz.korma.geom.vector.circle
 import com.soywiz.korma.geom.vector.rect
 
 class Player : Container() {
-    val horizontalSpeed = 5.0
+    companion object const {
+        const val SPEED = 5.0
+    }
 
     init {
         graphics {

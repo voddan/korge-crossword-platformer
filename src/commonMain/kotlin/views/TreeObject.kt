@@ -8,20 +8,23 @@ import com.soywiz.korma.geom.vector.rect
 import components.HorizontalShelf
 
 class TreeObject : Container(), HorizontalShelf {
-    val boxWidth = 100.0
+    companion object const {
+        const val WIDTH = 100.0
+        const val HEIGHT = WIDTH * 1.5
+    }
 
     override val positionLine = buildPath {
-        lineTo(boxWidth, 0.0)
+        lineTo(WIDTH, 0.0)
     }
 
     init {
         graphics {
             fill(Colors.DARKGREEN) {
-                rect(0.0, 0.0, boxWidth, -boxWidth * 1.5)
+                rect(0.0, 0.0, WIDTH, -HEIGHT)
             }
         }
 
-        val span = boxWidth / 4
+        val span = WIDTH / 4
         addLetter('T', 0.0, this)
         addLetter('R', span, this)
         addLetter('E', 2 * span, this)

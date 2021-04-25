@@ -11,7 +11,7 @@ class HorizontalKeyMovementComponent(val player: Player) : KeyComponent{
     override val view: BaseView = player
 
     override fun Views.onKeyEvent(event: KeyEvent) {
-        if(input.keys[Key.RIGHT]) player.x += player.horizontalSpeed
-        if(input.keys[Key.LEFT]) player.x -= player.horizontalSpeed
+        if(input.keys[Key.RIGHT]) player.x += Player.SPEED
+        if(input.keys[Key.LEFT]) player.x -= Player.SPEED
     }
 }

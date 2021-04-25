@@ -11,16 +11,18 @@ import components.HorizontalShelf
 import components.putOnShelf
 
 class BackpackUI : Container(), HorizontalShelf {
-    val minWidth = 500.0
+    companion object const {
+        const val MIN_WIDTH = 500.0
+    }
 
     override val positionLine: VectorPath = buildPath {
-        rLineToH(minWidth * 10)
+        rLineToH(MIN_WIDTH * 10)
     }
     
     init {
         graphics {
-            val rect = solidRect(minWidth, 5.0, color = Colors["#c22aff"])
-            rect.y = 20.0
+            val rect = solidRect(MIN_WIDTH, 5.0, color = Colors["#c22aff"])
+            rect.y = Letter.SIZE
         }
     }
 
@@ -28,7 +30,7 @@ class BackpackUI : Container(), HorizontalShelf {
 
     public fun addLetter(letter: Letter) {
         letter.parent?.removeChild(letter)
-        letter.x = collectedLetters.size * letter.width * 1.8
+        letter.x = collectedLetters.size * Letter.SIZE * 1.8
         putOnShelf(letter, this)
         addChild(letter)
         collectedLetters.add(letter)
