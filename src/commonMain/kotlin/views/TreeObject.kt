@@ -2,7 +2,6 @@ package views
 
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.graphics
-import com.soywiz.korge.view.onCollision
 import com.soywiz.korim.color.Colors
 import com.soywiz.korma.geom.shape.buildPath
 import com.soywiz.korma.geom.vector.rect
@@ -38,12 +37,12 @@ class TreeObject(val backpack: BackpackUI) : Container(), HorizontalShelf {
         letterBoxes[3].insertLetter(Letter('E'))
 
         for (box in letterBoxes) {
-            box.onCollision(filter = { it is Player }) {
-                val letter = box.removeLetter()
-                if(letter != null) {
-                    backpack.addLetter(letter)
-                }
-            }
+//            box.onCollision(filter = { it is Player }) {
+//                val letter = box.removeLetter()
+//                if(letter != null) {
+//                    backpack.moveLetter(letter)
+//                }
+//            }
         }
     }
 }

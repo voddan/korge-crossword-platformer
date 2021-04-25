@@ -1,7 +1,7 @@
 package views
 
 import com.soywiz.korge.view.Container
-import com.soywiz.korge.view.graphics
+import com.soywiz.korge.view.shapeView
 import com.soywiz.korge.view.solidRect
 import com.soywiz.korim.color.Colors
 import com.soywiz.korio.async.launchImmediately
@@ -23,23 +23,61 @@ class BackpackUI : Container(), HorizontalShelf {
     }
 
     init {
-        graphics {
+        shapeView {
             val rect = solidRect(MIN_WIDTH, 5.0, color = Colors["#c22aff"])
             rect.y = LetterBox.SIZE
         }
     }
 
     private val collectedLetters = mutableListOf<Letter>()
+    private var boxesCount = 0
 
-    public fun addLetter(letter: Letter) {
+    public fun appendLetter(letter: Letter) {
         collectedLetters.add(letter)
 
         val step = LetterBox.SIZE + MARGIN
-        val letterIndex = collectedLetters.size - 1
+        val letterIndex = boxesCount
         val letterBox = addLetterBox(LEFT_MARGIN + letterIndex * step, this)
+        boxesCount ++
 
         launchImmediately(Dispatchers.Default) {
-            letterBox.moveLetterTo(letter)
+            letterBox.moveLetter(letter)
         }
+    }
+
+    public fun swapLetters(box1: LetterBox, box2: LetterBox) {
+        box1.value ?: return
+        box2.value ?: return
+        if(box1.value == box2.value) return
+
+        val letter1 = box1.removeLetter()!!
+        val letter2 = box2.removeLetter()!!
+
+        val index = collectedLetters.indexOf(letter1)
+        collectedLetters.set(index, letter2)
+
+        launchImmediately(Dispatchers.Default) {
+            box1.moveLetter(letter2)
+        }
+
+        launchImmediately(Dispatchers.Default) {
+            box2.moveLetter(letter1)
+        }
+    }
+
+    public fun removeLetter(letter: Letter): LetterBox? {
+        collectedLetters.remove(letter)
+        val box = letter.parent as? LetterBox ?: return null
+        box.removeLetter()
+        return box
+    }
+
+    public fun findLetter(value: Char): Letter? {
+        return collectedLetters.lastOrNull { it.value == value }
+    }
+
+    public fun findLetterBox(value: Char): LetterBox? {
+        val letter = collectedLetters.lastOrNull { it.value == value }
+        return letter?.parent as? LetterBox
     }
 }

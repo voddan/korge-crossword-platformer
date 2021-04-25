@@ -57,19 +57,19 @@ class LetterBox : Container() {
         return letter
     }
 
-    public suspend fun moveLetterTo(letter: Letter) {
+    public suspend fun moveLetter(letter: Letter) {
         val old = letter.localToGlobalXY(0.0, 0.0)
         val new = this.localToGlobalXY(0.0, 0.0)
 
         letter.parent?.removeChild(letter)
         addChild(letter)
+        this.letter = letter
 
         letter.tween(
                 letter::globalX[old.x, new.x],
                 letter::globalY[old.y, new.y],
                 time = 1000.milliseconds)
     }
-
 }
 
 fun Container.addLetterBox(posX: Double, shelf: HorizontalShelf): LetterBox {
