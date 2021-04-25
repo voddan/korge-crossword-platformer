@@ -25,7 +25,6 @@ class GameScene() : Scene() {
         val backpack = BackpackUI()
         backpack.xy(40.0, 40.0)
         addChild(backpack)
-        backpack.addLetter(Letter('?'))
 
         platform = Platform(Rectangle.fromBounds(0, views.virtualHeight * 3/4, views.virtualWidth, views.virtualHeight))
         addChild(platform)
