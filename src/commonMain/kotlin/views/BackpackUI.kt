@@ -4,10 +4,12 @@ import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.graphics
 import com.soywiz.korge.view.solidRect
 import com.soywiz.korim.color.Colors
+import com.soywiz.korio.async.launchImmediately
 import com.soywiz.korma.geom.shape.buildPath
 import com.soywiz.korma.geom.vector.VectorPath
 import com.soywiz.korma.geom.vector.rLineToH
 import components.HorizontalShelf
+import kotlinx.coroutines.Dispatchers
 
 class BackpackUI : Container(), HorizontalShelf {
     companion object const {
@@ -31,11 +33,12 @@ class BackpackUI : Container(), HorizontalShelf {
     private val collectedLetters = mutableListOf<Letter>()
 
     public fun addLetter(letter: Letter) {
-        letter.parent?.removeChild(letter)
+        launchImmediately(Dispatchers.Default) {
+            lastLetterBox.moveLetterTo(letter)
+            collectedLetters.add(letter)
 
-        collectedLetters.add(letter)
-        lastLetterBox.insertLetter(letter)
-
-        lastLetterBox = addLetterBox(LEFT_MARGIN + collectedLetters.size * (LetterBox.SIZE + MARGIN), this)
+            val step = LetterBox.SIZE + MARGIN
+            lastLetterBox = addLetterBox(LEFT_MARGIN + collectedLetters.size * step, this)
+        }
     }
 }

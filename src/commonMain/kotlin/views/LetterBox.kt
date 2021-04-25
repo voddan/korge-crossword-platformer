@@ -1,5 +1,8 @@
 package views
 
+import com.soywiz.klock.milliseconds
+import com.soywiz.korge.tween.get
+import com.soywiz.korge.tween.tween
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.graphics
 import com.soywiz.korge.view.hitShape
@@ -44,6 +47,19 @@ class LetterBox : Container() {
             removeChild(letter)
         }
         return letter
+    }
+
+    public suspend fun moveLetterTo(letter: Letter) {
+        val old = letter.localToGlobalXY(0.0, 0.0)
+        val new = this.localToGlobalXY(0.0, 0.0)
+
+        letter.parent?.removeChild(letter)
+        addChild(letter)
+
+        letter.tween(
+                letter::globalX[old.x, new.x],
+                letter::globalY[old.y, new.y],
+                time = 1000.milliseconds)
     }
 
 }
