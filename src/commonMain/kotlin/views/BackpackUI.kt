@@ -33,12 +33,18 @@ class BackpackUI : Container(), HorizontalShelf {
     private val collectedLetters = mutableListOf<Letter>()
 
     public fun addLetter(letter: Letter) {
-        launchImmediately(Dispatchers.Default) {
-            lastLetterBox.moveLetterTo(letter)
-            collectedLetters.add(letter)
+        collectedLetters.add(letter)
 
-            val step = LetterBox.SIZE + MARGIN
-            lastLetterBox = addLetterBox(LEFT_MARGIN + collectedLetters.size * step, this)
+        val letterBox = lastLetterBox
+
+        val step = LetterBox.SIZE + MARGIN
+        val nextLetterBox = addLetterBox(LEFT_MARGIN + collectedLetters.size * step, this)
+        nextLetterBox.transparent = true
+        lastLetterBox = nextLetterBox
+
+        launchImmediately(Dispatchers.Default) {
+            letterBox.moveLetterTo(letter)
+            nextLetterBox.transparent = false
         }
     }
 }

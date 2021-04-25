@@ -4,6 +4,7 @@ import com.soywiz.klock.milliseconds
 import com.soywiz.korge.tween.get
 import com.soywiz.korge.tween.tween
 import com.soywiz.korge.view.Container
+import com.soywiz.korge.view.Graphics
 import com.soywiz.korge.view.graphics
 import com.soywiz.korge.view.hitShape
 import com.soywiz.korim.color.Colors
@@ -22,8 +23,15 @@ class LetterBox : Container() {
     private var letter: Letter? = null
     public val value: Char? get() = letter?.value
 
+    lateinit var graphics: Graphics
+    public var transparent: Boolean = false
+        set(value) {
+            field = value
+            graphics.visible = !value
+        }
+
     init {
-        graphics {
+        graphics = graphics {
             stroke(paint = Colors.BLACK, info = StrokeInfo(thickness = 1.5)) {
                 rectHole(0.0, 0.0, SIZE, SIZE)
             }

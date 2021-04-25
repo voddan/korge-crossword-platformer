@@ -24,7 +24,7 @@ class GameScene() : Scene() {
 
         val backpack = BackpackUI()
         backpack.xy(40.0, 40.0)
-        addChild(backpack)
+        // added after everyone else
 
         platform = Platform(Rectangle.fromBounds(0, views.virtualHeight * 3/4, views.virtualWidth, views.virtualHeight))
         addChild(platform)
@@ -42,6 +42,9 @@ class GameScene() : Scene() {
 
         addLetter('A', 300.0, platform)
         addLetter('B', 350.0, platform)
+
+        // must be the last
+        addChild(backpack)
     }
 
     fun Container.addBackground() {
