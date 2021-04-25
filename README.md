@@ -21,7 +21,7 @@ To run natively on Windows, Linux or MacOS follow those
 
  - [x] 0.1: Game runs on JVM, JS and natively.
  - [x] 0.2: Player moves left-right and interacts with platforms.
- - [ ] 0.3: Player can collect letters. Collected letters are displayed in UI.
+ - [x] 0.3: Player can collect letters. Collected letters are displayed in UI.
  - [ ] 0.4: Objects with letters disappear as their letters get collected.
  - [ ] 0.5: Objects reappear if correct letters are put into their slots.
  - [ ] 0.6: Player can interact with an appeared object  

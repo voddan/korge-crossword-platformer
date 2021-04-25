@@ -30,8 +30,8 @@ class GameScene() : Scene() {
         platform = Platform(Rectangle.fromBounds(0, views.virtualHeight * 3/4, views.virtualWidth, views.virtualHeight))
         addChild(platform)
 
-        val tree = TreeObject()
-        tree.x = 50.0
+        val tree = TreeObject(backpack)
+        tree.x = 100.0
         putOnShelf(tree, platform)
         addChild(tree)
 
