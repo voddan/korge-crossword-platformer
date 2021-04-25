@@ -25,9 +25,10 @@ class TreeObject : Container(), HorizontalShelf {
         }
 
         val span = WIDTH / 4
-        addLetter('T', 0.0, this)
-        addLetter('R', span, this)
-        addLetter('E', 2 * span, this)
-        addLetter('E', 3 * span, this)
+
+        addLetterBox(0.0, this).insertLetter(Letter('T'))
+        addLetterBox(span, this).insertLetter(Letter('R'))
+        addLetterBox(2 * span, this).insertLetter(Letter('E'))
+        addLetterBox(3 * span, this).insertLetter(Letter('E'))
     }
 }
