@@ -11,6 +11,7 @@ import com.soywiz.korma.geom.Rectangle
 import com.soywiz.korma.geom.vector.circle
 import com.soywiz.korma.geom.vector.rect
 import components.HorizontalKeyMovementComponent
+import components.StayOnShelfComponent
 import components.putOnShelf
 import views.*
 
@@ -36,7 +37,7 @@ class GameScene() : Scene() {
 
         player = Player()
         player.x = 50.0
-        putOnShelf(player, platform)
+        addComponent(StayOnShelfComponent(player, platform))
         addComponent(HorizontalKeyMovementComponent(player))
         addChild(player)
 
