@@ -24,9 +24,11 @@ class GameScene() : Scene() {
     override suspend fun Container.sceneInit() {
         addBackground()
 
-        val backpack = BackpackUI()
+        val movementAnimator = MovementAnimator()
+
+        val backpack = BackpackUI(movementAnimator)
         backpack.xy(40.0, 40.0)
-        // added after everyone else
+        addChild(backpack)
 
         platform = Platform(Rectangle.fromBounds(0, views.virtualHeight * 3/4, views.virtualWidth, views.virtualHeight))
         addChild(platform)
@@ -40,7 +42,7 @@ class GameScene() : Scene() {
         player.x = 50.0
         addComponent(StayOnShelfComponent(player, platform))
         addComponent(HorizontalKeyMovementComponent(player))
-        addComponent(LetterManipulatorKeyComponent(player, backpack))
+        addComponent(LetterManipulatorKeyComponent(player, backpack, movementAnimator))
         addComponent(SelectCollidingLetterBoxComponent(player))
         addChild(player)
 
@@ -48,7 +50,7 @@ class GameScene() : Scene() {
         addLetter('B', 350.0, platform)
 
         // must be the last
-        addChild(backpack)
+        addChild(movementAnimator)
     }
 
     fun Container.addBackground() {

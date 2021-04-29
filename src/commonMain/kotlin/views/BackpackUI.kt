@@ -4,14 +4,12 @@ import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.shapeView
 import com.soywiz.korge.view.solidRect
 import com.soywiz.korim.color.Colors
-import com.soywiz.korio.async.launchImmediately
 import com.soywiz.korma.geom.shape.buildPath
 import com.soywiz.korma.geom.vector.VectorPath
 import com.soywiz.korma.geom.vector.rLineToH
-import kotlinx.coroutines.Dispatchers
 import models.HorizontalShelf
 
-class BackpackUI : Container(), HorizontalShelf {
+class BackpackUI(val movementAnimator: MovementAnimator) : Container(), HorizontalShelf {
     companion object const {
         const val MIN_WIDTH = 500.0
         const val LEFT_MARGIN = 15.0
@@ -40,9 +38,7 @@ class BackpackUI : Container(), HorizontalShelf {
         val letterBox = addLetterBox(LEFT_MARGIN + letterIndex * step, this)
 //        boxesCount ++
 
-        launchImmediately(Dispatchers.Default) {
-            letterBox.moveLetter(letter)
-        }
+        movementAnimator.moveViewToParent(letter, letterBox)
     }
 
     public fun swapLetters(box1: LetterBox, box2: LetterBox) {
@@ -56,13 +52,8 @@ class BackpackUI : Container(), HorizontalShelf {
         val index = collectedLetters.indexOf(letter1)
         collectedLetters.set(index, letter2)
 
-        launchImmediately(Dispatchers.Default) {
-            box1.moveLetter(letter2)
-        }
-
-        launchImmediately(Dispatchers.Default) {
-            box2.moveLetter(letter1)
-        }
+        movementAnimator.moveViewToParent(letter1, box2)
+        movementAnimator.moveViewToParent(letter2, box1)
     }
 
     public fun removeLetter(letter: Letter): LetterBox? {
