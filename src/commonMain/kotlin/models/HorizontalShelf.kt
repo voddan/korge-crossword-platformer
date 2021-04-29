@@ -1,4 +1,4 @@
-package components
+package models
 
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.View

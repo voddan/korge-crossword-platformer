@@ -8,8 +8,8 @@ import com.soywiz.korio.async.launchImmediately
 import com.soywiz.korma.geom.shape.buildPath
 import com.soywiz.korma.geom.vector.VectorPath
 import com.soywiz.korma.geom.vector.rLineToH
-import components.HorizontalShelf
 import kotlinx.coroutines.Dispatchers
+import models.HorizontalShelf
 
 class BackpackUI : Container(), HorizontalShelf {
     companion object const {
@@ -30,15 +30,15 @@ class BackpackUI : Container(), HorizontalShelf {
     }
 
     private val collectedLetters = mutableListOf<Letter>()
-    private var boxesCount = 0
+//    private var boxesCount = 0
 
     public fun appendLetter(letter: Letter) {
         collectedLetters.add(letter)
 
         val step = LetterBox.SIZE + MARGIN
-        val letterIndex = boxesCount
+        val letterIndex = collectedLetters.size
         val letterBox = addLetterBox(LEFT_MARGIN + letterIndex * step, this)
-        boxesCount ++
+//        boxesCount ++
 
         launchImmediately(Dispatchers.Default) {
             letterBox.moveLetter(letter)

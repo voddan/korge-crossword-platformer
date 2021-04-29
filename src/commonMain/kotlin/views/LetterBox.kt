@@ -11,8 +11,8 @@ import com.soywiz.korim.color.Colors
 import com.soywiz.korim.vector.StrokeInfo
 import com.soywiz.korma.geom.vector.rect
 import com.soywiz.korma.geom.vector.rectHole
-import components.HorizontalShelf
-import components.putOnShelf
+import models.HorizontalShelf
+import models.putOnShelf
 
 class LetterBox : Container() {
     companion object const {

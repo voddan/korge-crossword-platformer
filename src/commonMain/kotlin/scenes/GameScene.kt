@@ -12,8 +12,9 @@ import com.soywiz.korma.geom.vector.circle
 import com.soywiz.korma.geom.vector.rect
 import components.HorizontalKeyMovementComponent
 import components.LetterManipulatorKeyComponent
+import components.SelectCollidingLetterBoxComponent
 import components.StayOnShelfComponent
-import components.putOnShelf
+import models.putOnShelf
 import views.*
 
 class GameScene() : Scene() {
@@ -40,6 +41,7 @@ class GameScene() : Scene() {
         addComponent(StayOnShelfComponent(player, platform))
         addComponent(HorizontalKeyMovementComponent(player))
         addComponent(LetterManipulatorKeyComponent(player, backpack))
+        addComponent(SelectCollidingLetterBoxComponent(player))
         addChild(player)
 
         addLetter('A', 300.0, platform)

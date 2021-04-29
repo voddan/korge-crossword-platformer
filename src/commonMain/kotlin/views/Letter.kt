@@ -7,8 +7,8 @@ import com.soywiz.korge.view.text
 import com.soywiz.korim.color.Colors
 import com.soywiz.korma.geom.Point
 import com.soywiz.korma.geom.vector.circle
-import components.HorizontalShelf
-import components.putOnShelf
+import models.HorizontalShelf
+import models.putOnShelf
 
 class Letter(val value: Char) : Container() {
     companion object const {

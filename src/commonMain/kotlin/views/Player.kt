@@ -13,7 +13,7 @@ class Player : Container() {
 
     init {
         graphics {
-            fill(Colors.RED) {
+            fill(Colors["#ff41c9"]) {
                 rect(-12, 0, 24, -55)
             }
             fill(Colors.BLACK) {

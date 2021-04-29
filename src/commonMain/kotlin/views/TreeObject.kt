@@ -5,7 +5,7 @@ import com.soywiz.korge.view.graphics
 import com.soywiz.korim.color.Colors
 import com.soywiz.korma.geom.shape.buildPath
 import com.soywiz.korma.geom.vector.rect
-import components.HorizontalShelf
+import models.HorizontalShelf
 
 class TreeObject(val backpack: BackpackUI) : Container(), HorizontalShelf {
     companion object const {

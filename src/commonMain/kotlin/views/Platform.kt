@@ -6,7 +6,7 @@ import com.soywiz.korim.color.Colors
 import com.soywiz.korma.geom.Rectangle
 import com.soywiz.korma.geom.shape.buildPath
 import com.soywiz.korma.geom.vector.*
-import components.HorizontalShelf
+import models.HorizontalShelf
 
 
 class Platform(val rect: Rectangle) : Container(), HorizontalShelf {
