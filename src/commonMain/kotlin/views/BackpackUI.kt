@@ -10,7 +10,7 @@ import com.soywiz.korma.geom.vector.VectorPath
 import com.soywiz.korma.geom.vector.rLineToH
 import models.HorizontalShelf
 
-class BackpackUI(val movementAnimator: MovementAnimator) : Container(), HorizontalShelf {
+class BackpackUI : Container(), HorizontalShelf {
     companion object const {
         const val MIN_WIDTH = 500.0
         const val LEFT_MARGIN = 15.0
@@ -32,13 +32,11 @@ class BackpackUI(val movementAnimator: MovementAnimator) : Container(), Horizont
 //    private var boxesCount = 0
 
     public fun appendLetter(letter: Letter) {
+        val box = nextLetterParent()
+        box.insertLetter(letter)
+
         collectedLetters.add(letter)
 //        boxesCount ++
-
-        val box = nextLetterParent()
-        movementAnimator.moveViewToParent(letter, box) {
-            box.insertLetter(letter)
-        }
     }
 
     public fun nextLetterPos(): Point {
@@ -54,23 +52,9 @@ class BackpackUI(val movementAnimator: MovementAnimator) : Container(), Horizont
         return box
     }
 
-    public fun swapLetters(box1: LetterBox, box2: LetterBox) {
-        box1.value ?: return
-        box2.value ?: return
-        if(box1.value == box2.value) return
-
-        val letter1 = box1.removeLetter()!!
-        val letter2 = box2.removeLetter()!!
-
-        val index = collectedLetters.indexOf(letter1)
-        collectedLetters.set(index, letter2)
-
-        movementAnimator.moveViewToParent(letter1, box2) {
-            box2.insertLetter(letter1)
-        }
-        movementAnimator.moveViewToParent(letter2, box1) {
-            box1.insertLetter(letter2)
-        }
+    fun replaceLetter(letter: Letter, newLetter: Letter) {
+        val index = collectedLetters.indexOf(letter)
+        collectedLetters.set(index, newLetter)
     }
 
     public fun removeLetter(letter: Letter): LetterBox? {

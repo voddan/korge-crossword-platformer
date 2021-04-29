@@ -26,7 +26,7 @@ class GameScene() : Scene() {
 
         val movementAnimator = MovementAnimator()
 
-        val backpack = BackpackUI(movementAnimator)
+        val backpack = BackpackUI()
         backpack.xy(40.0, 40.0)
         addChild(backpack)
 
