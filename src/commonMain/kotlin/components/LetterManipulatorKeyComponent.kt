@@ -66,15 +66,16 @@ class LetterManipulatorKeyComponent(val player: Player, val backpack: BackpackUI
         if (selectedBox.value != null) {
             if(backpackLetter.value == selectedBox.value) return
 
-            backpackBox.removeLetter()!!
             val selectedLetter = selectedBox.removeLetter()!!
 
             backpack.replaceLetter(backpackLetter, selectedLetter)
 
-            movementAnimator.moveViewToParent(backpackLetter, selectedBox) {
+            movementAnimator.moveViewTo(backpackLetter, selectedLetter.globalPos) {
+                backpackLetter.pos = Point(0.0, 0.0)
                 selectedBox.insertLetter(backpackLetter)
             }
-            movementAnimator.moveViewToParent(selectedLetter, backpackBox) {
+            movementAnimator.moveViewTo(selectedLetter, backpackBox.globalPos) {
+                selectedLetter.pos = Point(0.0, 0.0)
                 backpackBox.insertLetter(selectedLetter)
             }
         } else {
