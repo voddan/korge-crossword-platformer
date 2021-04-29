@@ -4,6 +4,7 @@ import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.shapeView
 import com.soywiz.korge.view.solidRect
 import com.soywiz.korim.color.Colors
+import com.soywiz.korma.geom.Point
 import com.soywiz.korma.geom.shape.buildPath
 import com.soywiz.korma.geom.vector.VectorPath
 import com.soywiz.korma.geom.vector.rLineToH
@@ -32,13 +33,25 @@ class BackpackUI(val movementAnimator: MovementAnimator) : Container(), Horizont
 
     public fun appendLetter(letter: Letter) {
         collectedLetters.add(letter)
-
-        val step = LetterBox.SIZE + MARGIN
-        val letterIndex = collectedLetters.size
-        val letterBox = addLetterBox(LEFT_MARGIN + letterIndex * step, this)
 //        boxesCount ++
 
-        movementAnimator.moveViewToParent(letter, letterBox)
+        val box = nextLetterParent()
+        movementAnimator.moveViewToParent(letter, box) {
+            box.insertLetter(letter)
+        }
+    }
+
+    public fun nextLetterPos(): Point {
+        val step = LetterBox.SIZE + MARGIN
+        val letterIndex = collectedLetters.size
+        return Point(LEFT_MARGIN + letterIndex * step, 0.0)
+    }
+
+    public fun nextLetterParent(): LetterBox {
+        val box = LetterBox()
+        box.pos = nextLetterPos()
+        addChild(box)
+        return box
     }
 
     public fun swapLetters(box1: LetterBox, box2: LetterBox) {
@@ -52,8 +65,12 @@ class BackpackUI(val movementAnimator: MovementAnimator) : Container(), Horizont
         val index = collectedLetters.indexOf(letter1)
         collectedLetters.set(index, letter2)
 
-        movementAnimator.moveViewToParent(letter1, box2)
-        movementAnimator.moveViewToParent(letter2, box1)
+        movementAnimator.moveViewToParent(letter1, box2) {
+            box2.insertLetter(letter1)
+        }
+        movementAnimator.moveViewToParent(letter2, box1) {
+            box1.insertLetter(letter2)
+        }
     }
 
     public fun removeLetter(letter: Letter): LetterBox? {
@@ -68,7 +85,9 @@ class BackpackUI(val movementAnimator: MovementAnimator) : Container(), Horizont
     }
 
     public fun findLetterBox(value: Char): LetterBox? {
-        val letter = collectedLetters.lastOrNull { it.value == value }
-        return letter?.parent as? LetterBox
+        val letter = findLetter(value)
+        val box = letter?.parent as? LetterBox
+//        assert(box?.firstChild == letter)
+        return box
     }
 }

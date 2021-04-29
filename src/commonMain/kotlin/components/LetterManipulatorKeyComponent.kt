@@ -53,17 +53,19 @@ class LetterManipulatorKeyComponent(val player: Player, val backpack: BackpackUI
         }
     }
 
-    private fun swapWithBackpack(box: LetterBox?, value: Char) {
-        box ?: return
-        if (box.value == value) return
-        val backpackLetter = backpack.findLetter(value) ?: return
-        val backpackBox = backpack.findLetterBox(value) ?: return
+    private fun swapWithBackpack(selectedBox: LetterBox?, newValue: Char) {
+        selectedBox ?: return
+        if (selectedBox.value == newValue) return
+        val backpackLetter = backpack.findLetter(newValue) ?: return
+        val backpackBox = backpack.findLetterBox(newValue) ?: return
 
-        if (box.value != null) {
-            backpack.swapLetters(backpackBox, box)
+        if (selectedBox.value != null) {
+            backpack.swapLetters(backpackBox, selectedBox)
         } else {
             backpack.removeLetter(backpackLetter)
-            movementAnimator.moveViewToParent(backpackLetter, box)
+            movementAnimator.moveViewToParent(backpackLetter, selectedBox) {
+                selectedBox.insertLetter(backpackLetter)
+            }
         }
     }
 
