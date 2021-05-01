@@ -14,15 +14,10 @@ import views.moveViewToParent
 class LetterManipulatorKeyComponent(val player: Player, val backpack: BackpackUI, val movementAnimator: MovementAnimator) : KeyComponent {
     override val view: BaseView = player
 
-    private val boxSelector = SelectCollidingLetterBoxComponent(player)
-
-    init {
-        player.addComponent(boxSelector)
-    }
+    private val boxSelector = SelectCollidingLetterBoxComponent(player).also { player.addComponent(it) }
 
     override fun Views.onKeyEvent(event: KeyEvent) {
-        if (skipNoise(event.key)) return
-        println(event.key)
+        if(!event.typeDown) return
 
         if (event.key == Key.SPACE) {
             sendToBackpack(boxSelector.selection())
@@ -31,21 +26,6 @@ class LetterManipulatorKeyComponent(val player: Player, val backpack: BackpackUI
         if (event.key.isLetter()) {
             val value = event.key.name.first()
             swapWithBackpack(boxSelector.selection(), value)
-        }
-    }
-
-    // TODO: why do I get duplicated key presses?
-    // TODO: can the system be resilient to them
-    private var lastKey: Key? = null
-    private fun skipNoise(key: Key): Boolean {
-        if (key != Key.SPACE && !key.isLetter()) return true
-
-        if (key != lastKey) {
-            lastKey = key
-            return true
-        } else {
-            lastKey = null
-            return false
         }
     }
 
@@ -64,10 +44,10 @@ class LetterManipulatorKeyComponent(val player: Player, val backpack: BackpackUI
             movementAnimator.moveViewToParent(selectedBox.letter!!, backpack, dPos = backpack.nextLetterPos())
         }
     }
+}
 
-    fun Key.isLetter(): Boolean {
-        val keyName = this.name
-        if (keyName.length != 1) return false
-        return keyName.first() in 'A'..'Z'
-    }
+fun Key.isLetter(): Boolean {
+    val keyName = this.name
+    if (keyName.length != 1) return false
+    return keyName.first() in 'A'..'Z'
 }
