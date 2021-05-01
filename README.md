@@ -22,8 +22,8 @@ To run natively on Windows, Linux or MacOS follow those
  - [x] 0.1: Game runs on JVM, JS and natively.
  - [x] 0.2: Player moves left-right and interacts with platforms.
  - [x] 0.3: Player can collect letters. Collected letters are displayed in UI.
- - [ ] 0.4: Objects with letters disappear as their letters get collected.
- - [ ] 0.5: Objects reappear if correct letters are put into their slots.
+ - [x] 0.4: Objects with letters disappear as their letters get collected.
+ - [x] 0.5: Objects reappear if correct letters are put into their slots.
  - [ ] 0.6: Player can interact with an appeared object  
  - [ ] 0.7: One game level with 3 objects and 2-3 obstacles
  - [ ] **1.0**: 1st game level is deployed to [itch.io](https://itch.io/) to get feedback
