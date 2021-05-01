@@ -15,7 +15,12 @@ import components.LetterManipulatorKeyComponent
 import components.SelectCollidingLetterBoxComponent
 import components.StayOnShelfComponent
 import models.putOnShelf
-import views.*
+import views.BackpackUI
+import views.MovementAnimator
+import views.Platform
+import views.Player
+import views.TreeObject
+import views.addLetter
 
 class GameScene() : Scene() {
     lateinit var player: Player
@@ -25,6 +30,7 @@ class GameScene() : Scene() {
         addBackground()
 
         val movementAnimator = MovementAnimator()
+        addChild(movementAnimator)
 
         val backpack = BackpackUI()
         backpack.xy(40.0, 40.0)
@@ -49,8 +55,8 @@ class GameScene() : Scene() {
         addLetter('A', 300.0, platform)
         addLetter('B', 350.0, platform)
 
-        // must be the last
-        addChild(movementAnimator)
+        // must be in front
+        sendChildToFront(movementAnimator)
     }
 
     fun Container.addBackground() {
