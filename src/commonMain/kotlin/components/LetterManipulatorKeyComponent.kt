@@ -6,7 +6,12 @@ import com.soywiz.korge.baseview.BaseView
 import com.soywiz.korge.component.KeyComponent
 import com.soywiz.korge.view.Views
 import com.soywiz.korma.geom.Point
-import views.*
+import views.BackpackUI
+import views.LetterBox
+import views.MovementAnimator
+import views.Player
+import views.globalPos
+import views.moveViewToParent
 
 class LetterManipulatorKeyComponent(val player: Player, val backpack: BackpackUI, val movementAnimator: MovementAnimator) : KeyComponent {
     override val view: BaseView = player
@@ -61,22 +66,25 @@ class LetterManipulatorKeyComponent(val player: Player, val backpack: BackpackUI
         selectedBox ?: return
         if (selectedBox.value == newValue) return
         val backpackLetter = backpack.findLetter(newValue) ?: return
-        val backpackBox = backpack.findLetterBox(newValue) ?: return
 
         if (selectedBox.value != null) {
             if(backpackLetter.value == selectedBox.value) return
 
             val selectedLetter = selectedBox.removeLetter()!!
 
-            backpack.replaceLetter(backpackLetter, selectedLetter)
 
-            movementAnimator.moveViewTo(backpackLetter, selectedLetter.globalPos) {
-                backpackLetter.pos = Point(0.0, 0.0)
+            val selectedPos = selectedLetter.globalPos
+            val backpackPos = backpackLetter.globalPos
+            val oldLocalPos = backpackLetter.pos
+
+            movementAnimator.moveViewTo(backpackLetter, selectedPos) {
                 selectedBox.insertLetter(backpackLetter)
             }
-            movementAnimator.moveViewTo(selectedLetter, backpackBox.globalPos) {
-                selectedLetter.pos = Point(0.0, 0.0)
-                backpackBox.insertLetter(selectedLetter)
+
+            movementAnimator.moveViewTo(selectedLetter, backpackPos) {
+                backpack.replaceLetter(backpackLetter, selectedLetter)
+                println("old pos: $oldLocalPos")
+                selectedLetter.pos = backpack.globalToLocal(backpackPos)
             }
         } else {
             backpack.removeLetter(backpackLetter)

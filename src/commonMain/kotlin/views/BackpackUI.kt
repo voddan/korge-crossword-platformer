@@ -29,14 +29,12 @@ class BackpackUI : Container(), HorizontalShelf {
     }
 
     private val collectedLetters = mutableListOf<Letter>()
-//    private var boxesCount = 0
 
     public fun appendLetter(letter: Letter) {
-        val box = nextLetterParent()
-        box.insertLetter(letter)
+        addChild(letter)
+        letter.pos = nextLetterPos()
 
         collectedLetters.add(letter)
-//        boxesCount ++
     }
 
     public fun nextLetterPos(): Point {
@@ -45,33 +43,17 @@ class BackpackUI : Container(), HorizontalShelf {
         return Point(LEFT_MARGIN + letterIndex * step, 0.0)
     }
 
-    public fun nextLetterParent(): LetterBox {
-        val box = LetterBox()
-        box.pos = nextLetterPos()
-        addChild(box)
-        return box
-    }
-
     fun replaceLetter(letter: Letter, newLetter: Letter) {
-        val index = collectedLetters.indexOf(letter)
-        collectedLetters.set(index, newLetter)
+        collectedLetters.remove(letter)
+        collectedLetters.add(newLetter)
+        addChild(newLetter)
     }
 
-    public fun removeLetter(letter: Letter): LetterBox? {
+    public fun removeLetter(letter: Letter) {
         collectedLetters.remove(letter)
-        val box = letter.parent as? LetterBox ?: return null
-        box.removeLetter()
-        return box
     }
 
     public fun findLetter(value: Char): Letter? {
         return collectedLetters.lastOrNull { it.value == value }
-    }
-
-    public fun findLetterBox(value: Char): LetterBox? {
-        val letter = findLetter(value)
-        val box = letter?.parent as? LetterBox
-//        assert(box?.firstChild == letter)
-        return box
     }
 }

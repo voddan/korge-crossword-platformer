@@ -6,6 +6,7 @@ import com.soywiz.korge.view.graphics
 import com.soywiz.korge.view.hitShape
 import com.soywiz.korim.color.Colors
 import com.soywiz.korim.vector.StrokeInfo
+import com.soywiz.korma.geom.Point
 import com.soywiz.korma.geom.vector.rect
 import com.soywiz.korma.geom.vector.rectHole
 import models.HorizontalShelf
@@ -35,17 +36,14 @@ class LetterBox : Container() {
     }
 
     public fun insertLetter(letter: Letter) {
-        removeLetter()
         this.letter = letter
         addChild(letter)
+        letter.pos = Point(0.0, 0.0)
     }
 
     public fun removeLetter(): Letter? {
         val letter = this.letter
         this.letter = null
-        if(letter != null) {
-            removeChild(letter)
-        }
         return letter
     }
 }
