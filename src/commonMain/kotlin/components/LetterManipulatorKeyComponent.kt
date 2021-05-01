@@ -5,7 +5,6 @@ import com.soywiz.korev.KeyEvent
 import com.soywiz.korge.baseview.BaseView
 import com.soywiz.korge.component.KeyComponent
 import com.soywiz.korge.view.Views
-import com.soywiz.korma.geom.Point
 import views.BackpackUI
 import views.LetterBox
 import views.MovementAnimator
@@ -56,8 +55,8 @@ class LetterManipulatorKeyComponent(val player: Player, val backpack: BackpackUI
         val letter = box.letter
         if (letter != null) {
             movementAnimator.moveViewTo(letter, backpack.localToGlobal(backpack.nextLetterPos())) {
-                letter.pos = Point(0.0, 0.0)
-                backpack.appendLetter(letter)
+                letter.pos = backpack.nextLetterPos()
+                backpack.addChild(letter)
             }
         }
     }
@@ -82,12 +81,11 @@ class LetterManipulatorKeyComponent(val player: Player, val backpack: BackpackUI
             }
 
             movementAnimator.moveViewTo(selectedLetter, backpackPos) {
-                backpack.replaceLetter(backpackLetter, selectedLetter)
+                backpack.addChild(selectedLetter)
                 println("old pos: $oldLocalPos")
                 selectedLetter.pos = backpack.globalToLocal(backpackPos)
             }
         } else {
-            backpack.removeLetter(backpackLetter)
             movementAnimator.moveViewToParent(backpackLetter, selectedBox) {
                 selectedBox.insertLetter(backpackLetter)
             }
