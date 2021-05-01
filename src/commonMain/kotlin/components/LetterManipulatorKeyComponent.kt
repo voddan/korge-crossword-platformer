@@ -67,7 +67,7 @@ class LetterManipulatorKeyComponent(val player: Player, val backpack: BackpackUI
         if (selectedBox.value == newValue) return
         val backpackLetter = backpack.findLetter(newValue) ?: return
 
-        if (selectedBox.value != null) {
+        if (!selectedBox.isEmpty) {
             if(backpackLetter.value == selectedBox.value) return
 
             val selectedLetter = selectedBox.letter!!

@@ -18,8 +18,9 @@ class LetterBox : Container() {
         const val HITBOX_HEIGHT = 100.0
     }
 
-    public val value: Char? get() = letter?.value
     public val letter: Letter? get() = children.singleOrNull { it is Letter } as Letter?
+    public val value: Char? get() = letter?.value
+    public val isEmpty: Boolean get() = (letter == null)
 
     lateinit var graphics: Graphics
 
