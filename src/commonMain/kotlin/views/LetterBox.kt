@@ -18,8 +18,8 @@ class LetterBox : Container() {
         const val HITBOX_HEIGHT = 100.0
     }
 
-    private var letter: Letter? = null
     public val value: Char? get() = letter?.value
+    public val letter: Letter? get() = children.singleOrNull { it is Letter } as Letter?
 
     lateinit var graphics: Graphics
 
@@ -36,15 +36,8 @@ class LetterBox : Container() {
     }
 
     public fun insertLetter(letter: Letter) {
-        this.letter = letter
         addChild(letter)
         letter.pos = Point(0.0, 0.0)
-    }
-
-    public fun removeLetter(): Letter? {
-        val letter = this.letter
-        this.letter = null
-        return letter
     }
 }
 

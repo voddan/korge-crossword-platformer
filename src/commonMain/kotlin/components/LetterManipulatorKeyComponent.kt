@@ -53,7 +53,7 @@ class LetterManipulatorKeyComponent(val player: Player, val backpack: BackpackUI
 
     private fun clearBox(box: LetterBox?) {
         box ?: return
-        val letter = box.removeLetter()
+        val letter = box.letter
         if (letter != null) {
             movementAnimator.moveViewTo(letter, backpack.localToGlobal(backpack.nextLetterPos())) {
                 letter.pos = Point(0.0, 0.0)
@@ -70,7 +70,7 @@ class LetterManipulatorKeyComponent(val player: Player, val backpack: BackpackUI
         if (selectedBox.value != null) {
             if(backpackLetter.value == selectedBox.value) return
 
-            val selectedLetter = selectedBox.removeLetter()!!
+            val selectedLetter = selectedBox.letter!!
 
 
             val selectedPos = selectedLetter.globalPos
