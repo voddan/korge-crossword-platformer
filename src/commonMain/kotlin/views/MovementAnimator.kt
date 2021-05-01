@@ -26,15 +26,12 @@ class MovementAnimator : Container() {
     }
 }
 
-fun MovementAnimator.swapViews(view1: View, view2: View, doAfterEach: (View) -> Unit = {}) {
-    moveViewTo(view1, view2.globalPos, doAfterEach)
-    moveViewTo(view2, view1.globalPos, doAfterEach)
-}
-
-fun MovementAnimator.moveViewToParent(view: View, parent: Container, doAfter: (View) -> Unit = {}) {
-    moveViewTo(view, parent.globalPos) {
+fun MovementAnimator.moveViewToParent(view: View, parent: Container,
+                                      dPos: Point = Point(0.0, 0.0),
+                                      doAfter: (View) -> Unit = {}) {
+    moveViewTo(view, parent.globalPos + dPos) {
         parent.addChild(view)
-        view.pos = Point(0.0, 0.0)
+        view.pos = dPos
         doAfter(view)
     }
 }
