@@ -15,11 +15,11 @@ import components.LetterManipulatorKeyComponent
 import components.SelectCollidingLetterBoxComponent
 import components.StayOnShelfComponent
 import models.putOnShelf
+import objects.TreeObject
 import views.BackpackUI
 import views.MovementAnimator
 import views.Platform
 import views.Player
-import views.TreeObject
 import views.addLetter
 
 class GameScene() : Scene() {

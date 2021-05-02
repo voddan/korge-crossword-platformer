@@ -1,4 +1,4 @@
-package models
+package views
 
 import com.soywiz.korge.view.View
 import com.soywiz.korge.view.image

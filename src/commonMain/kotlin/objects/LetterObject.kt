@@ -1,10 +1,12 @@
-package views
+package objects
 
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.addUpdater
 import com.soywiz.korio.lang.assert
-import models.DisappearingView
 import models.Loadable
+import views.DisappearingView
+import views.Letter
+import views.LetterBox
 
 abstract class LetterObject(val word: String) : Container(), Loadable {
     abstract suspend fun initObjectView(): DisappearingView

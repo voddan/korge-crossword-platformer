@@ -1,9 +1,9 @@
-package views
+package objects
 
 import com.soywiz.korim.format.readBitmap
 import com.soywiz.korio.file.std.resourcesVfs
-import models.DisappearingBitmapView
-import models.DisappearingView
+import views.DisappearingBitmapView
+import views.DisappearingView
 
 class TreeObject(val initialWord: String) : LetterObject("TREE") {
     override suspend fun initObjectView(): DisappearingView {

@@ -1,7 +1,8 @@
-package models
+package views
 
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.View
+import models.Loadable
 import kotlin.properties.Delegates
 
 abstract class DisappearingView : Container(), Loadable {
