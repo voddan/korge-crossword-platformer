@@ -27,7 +27,8 @@ class Platform(val rect: Rectangle) : Container(), HorizontalShelf {
         rLineToH(span / 3)
         rLineToV(- step)
         rLineToH(span / 3)
-        rLineTo(2 * span, -step)
+//        rLineTo(2 * span, -step)
+        rLineToH(2 * span)
     }
 
     init {

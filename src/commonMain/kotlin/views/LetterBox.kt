@@ -45,7 +45,7 @@ class LetterBox : Container() {
 fun Container.addLetterBox(posX: Double, shelf: HorizontalShelf): LetterBox {
     val box = LetterBox()
     box.x = posX
-    putOnShelf(box, shelf)
+    box.putOnShelf(shelf)
     addChild(box)
     return box
 }

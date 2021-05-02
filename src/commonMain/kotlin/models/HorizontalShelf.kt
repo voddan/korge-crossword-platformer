@@ -1,6 +1,5 @@
 package models
 
-import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.View
 import com.soywiz.korma.geom.shape.Shape2d
 import com.soywiz.korma.geom.shape.bounds
@@ -34,6 +33,6 @@ interface HorizontalShelf {
     }
 }
 
-fun Container.putOnShelf(view: View, shelf: HorizontalShelf) {
-    view.y = shelf.positionY(view.x)
+fun View.putOnShelf(shelf: HorizontalShelf) {
+    y = shelf.positionY(x)
 }

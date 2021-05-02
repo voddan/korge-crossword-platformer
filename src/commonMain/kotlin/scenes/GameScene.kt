@@ -3,6 +3,7 @@ package scenes
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.Graphics
+import com.soywiz.korge.view.addTo
 import com.soywiz.korge.view.graphics
 import com.soywiz.korge.view.xy
 import com.soywiz.korim.color.Colors
@@ -15,6 +16,7 @@ import components.LetterManipulatorKeyComponent
 import components.SelectCollidingLetterBoxComponent
 import components.StayOnShelfComponent
 import models.putOnShelf
+import objects.MapleTreeObject
 import objects.TreeObject
 import views.BackpackUI
 import views.MovementAnimator
@@ -23,7 +25,6 @@ import views.Player
 import views.addLetter
 
 class GameScene() : Scene() {
-    lateinit var player: Player
     lateinit var platform: Platform
 
     override suspend fun Container.sceneInit() {
@@ -32,26 +33,36 @@ class GameScene() : Scene() {
         val movementAnimator = MovementAnimator()
         addChild(movementAnimator)
 
-        val backpack = BackpackUI()
-        backpack.xy(40.0, 40.0)
-        addChild(backpack)
+        val backpack = BackpackUI().apply {
+            xy(40.0, 40.0)
+            addTo(this@sceneInit)
+        }
 
         platform = Platform(Rectangle.fromBounds(0, views.virtualHeight * 3/4, views.virtualWidth, views.virtualHeight))
         addChild(platform)
 
-        val tree = TreeObject("TREE")
-        tree.initLoad()
-        tree.x = 100.0
-        putOnShelf(tree, platform)
-        addChild(tree)
+        TreeObject("TREE").apply {
+            initLoad()
+            x = 100.0
+            putOnShelf(platform)
+            addTo(this@sceneInit)
+        }
 
-        player = Player()
-        player.x = 50.0
-        addComponent(StayOnShelfComponent(player, platform))
-        addComponent(HorizontalKeyMovementComponent(player))
-        addComponent(LetterManipulatorKeyComponent(player, backpack, movementAnimator))
-        addComponent(SelectCollidingLetterBoxComponent(player))
-        addChild(player)
+        MapleTreeObject("**P**").apply {
+            initLoad()
+            x = 700.0
+            putOnShelf(platform)
+            addTo(this@sceneInit)
+        }
+
+        Player().apply {
+            x = 50.0
+            addComponent(StayOnShelfComponent(this, platform))
+            addComponent(HorizontalKeyMovementComponent(this))
+            addComponent(LetterManipulatorKeyComponent(this, backpack, movementAnimator))
+            addComponent(SelectCollidingLetterBoxComponent(this))
+            addTo(this@sceneInit)
+        }
 
         addLetter('A', 300.0, platform)
         addLetter('B', 350.0, platform)

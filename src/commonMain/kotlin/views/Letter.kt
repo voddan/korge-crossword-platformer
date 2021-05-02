@@ -35,7 +35,7 @@ class Letter(val value: Char) : Container() {
 fun Container.addLetter(value: Char, posX: Double, shelf: HorizontalShelf): Letter {
     val letter = Letter(value)
     letter.x = posX
-    putOnShelf(letter, shelf)
+    letter.putOnShelf(shelf)
     addChild(letter)
     return letter
 }
