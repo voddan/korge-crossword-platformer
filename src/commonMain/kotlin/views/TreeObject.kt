@@ -1,30 +1,60 @@
 package views
 
-import com.soywiz.korge.view.graphics
+import com.soywiz.korge.view.Container
+import com.soywiz.korge.view.View
+import com.soywiz.korge.view.container
+import com.soywiz.korge.view.image
+import com.soywiz.korim.bitmap.Bitmap
+import com.soywiz.korim.bitmap.Bitmap32
 import com.soywiz.korim.color.Colors
-import com.soywiz.korim.vector.StrokeInfo
-import com.soywiz.korma.geom.vector.rect
-import com.soywiz.korma.geom.vector.rectHole
+import com.soywiz.korim.color.RGBA
+import com.soywiz.korim.format.readBitmap
+import com.soywiz.korio.file.std.resourcesVfs
 
-class TreeObject(initialWord: String) : LetterObject("TREE") {
-    companion object const {
-        const val WIDTH = 100.0
-        const val HEIGHT = WIDTH * 1.5
-    }
+class TreeObject(val initialWord: String) : LetterObject("TREE") {
+    lateinit var sourceImage: Bitmap
 
-    override fun initContours() = graphics {
-        fill(Colors.DARKGREEN) {
-            rect(0.0, 0.0, WIDTH, -HEIGHT)
+    override suspend fun initGraphics(): Container {
+        sourceImage = resourcesVfs["trees/Frame/Big/-_tree_1_big_0.png"].readBitmap()
+
+        return container {
+            val img = image(sourceImage) {
+                y = -height
+            }
         }
     }
 
-    override fun initGraphics() = graphics {
-        stroke(Colors["#142164"], StrokeInfo()) {
-            rectHole(0.0, 0.0, WIDTH, -HEIGHT)
+    override suspend fun initContours(graphics: View) = container {
+        image(sourceImage.toBMP32().edges()) {
+            y = -height
         }
     }
 
-    init {
-       insertLetters(initialWord)
+
+    override suspend fun initLoad() {
+        super.initLoad()
+        insertLetters(initialWord)
     }
+}
+
+fun Bitmap32.edges(): Bitmap32 {
+    val img = copyTo(Bitmap32(width, height))
+    img.toMonochromeInPlace()
+
+    val scaleFactor = 0.8
+    val blur = img.scale(scaleFactor, smooth = true).scale(1/scaleFactor, smooth = false)
+    blur.toMonochromeInPlace()
+
+    // Images may have slightly different size depending on [scaleFactor]
+    val (smaller, bigger) = if(img.width <= blur.width) img to blur else blur to img
+
+    val edges = Bitmap32.diff(smaller, bigger.copySliceWithSize(0, 0, smaller.width, smaller.height))
+    return edges
+}
+
+fun Bitmap32.scale(scale: Double, smooth: Boolean)
+    = scaled((width * scale).toInt(), (height * scale).toInt(), smooth = smooth)
+
+fun Bitmap32.toMonochromeInPlace(background: RGBA = Colors.TRANSPARENT_WHITE, foreground: RGBA = Colors.BLACK) {
+    updateColors { color -> if(color.a == 0) background else foreground }
 }

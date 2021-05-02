@@ -1,32 +1,45 @@
 package views
 
 import com.soywiz.korge.view.Container
-import com.soywiz.korge.view.Graphics
+import com.soywiz.korge.view.View
 import com.soywiz.korge.view.addUpdater
 import com.soywiz.korio.lang.assert
+import models.Loadable
 
-abstract class LetterObject(val word: String) : Container() {
-    abstract fun initGraphics(): Graphics
-    abstract fun initContours(): Graphics
+abstract class LetterObject(val word: String) : Container(), Loadable {
+    abstract suspend fun initGraphics(): View
+    abstract suspend fun initContours(graphics: View): View
 
-    val graphics: Graphics by lazy { initGraphics() }
-    val contours: Graphics by lazy { initContours() }
+    lateinit var graphics: View
+    lateinit var contours: View
 
-    val graphicWidth = maxOf(graphics.globalBounds.width, contours.globalBounds.width)
-    val boxStep = (graphicWidth - LetterBox.SIZE) / (word.length - 1)  // word >= 2
+    var graphicWidth: Double = 0.0
+    var boxStep: Double = 0.0
 
-    val boxes: List<LetterBox> = word.mapIndexed { i, ch ->
-        val box = LetterBox()
-        box.x = boxStep * i
-        addChild(box)
-        box
-    }
+    lateinit var boxes: List<LetterBox>
 
     init {
+
+    }
+
+    override suspend fun initLoad() {
+        graphics = initGraphics()
+        contours = initContours(graphics)
+
+        graphicWidth = maxOf(graphics.globalBounds.width, contours.globalBounds.width)
+        boxStep = (graphicWidth - LetterBox.SIZE) / (word.length - 1)  // word >= 2
+
+        boxes  = word.mapIndexed { i, ch ->
+            val box = LetterBox()
+            box.x = boxStep * i
+            addChild(box)
+            box
+        }
+
         addUpdater {
             val completeness = countCorrectLetters().toDouble() / word.length
-            graphics.alpha = 1 - completeness
-            contours.alpha = completeness
+            graphics.alpha = completeness
+            contours.alpha = 1 - completeness
         }
     }
 

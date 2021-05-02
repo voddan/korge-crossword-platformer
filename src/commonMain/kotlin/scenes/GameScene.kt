@@ -40,6 +40,7 @@ class GameScene() : Scene() {
         addChild(platform)
 
         val tree = TreeObject("TREE")
+        tree.initLoad()
         tree.x = 100.0
         putOnShelf(tree, platform)
         addChild(tree)
