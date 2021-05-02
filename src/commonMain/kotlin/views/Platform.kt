@@ -5,7 +5,12 @@ import com.soywiz.korge.view.graphics
 import com.soywiz.korim.color.Colors
 import com.soywiz.korma.geom.Rectangle
 import com.soywiz.korma.geom.shape.buildPath
-import com.soywiz.korma.geom.vector.*
+import com.soywiz.korma.geom.vector.VectorPath
+import com.soywiz.korma.geom.vector.lineToV
+import com.soywiz.korma.geom.vector.path
+import com.soywiz.korma.geom.vector.rLineTo
+import com.soywiz.korma.geom.vector.rLineToH
+import com.soywiz.korma.geom.vector.rLineToV
 import models.HorizontalShelf
 
 
@@ -20,8 +25,9 @@ class Platform(val rect: Rectangle) : Container(), HorizontalShelf {
         rLineToH(span / 3)
         rLineToV(step)
         rLineToH(span / 3)
-//            rLineToV(- step)
-//            rLineToH(span / 3)
+        rLineToV(- step)
+        rLineToH(span / 3)
+        rLineTo(2 * span, -step)
     }
 
     init {

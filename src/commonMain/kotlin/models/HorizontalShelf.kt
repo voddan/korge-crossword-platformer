@@ -27,10 +27,10 @@ interface HorizontalShelf {
 
     fun positionY(x: Double): Double {
         val rect = rect()
-        val cutLine = Shape2d.Rectangle(x, rect.top, x, rect.bottom)
+        val cutLine = Shape2d.Rectangle(x, rect.top, 1.0, rect.bottom)
         val shape2d = shape().toShape2d(closed = false)
         val intersect = shape2d.intersection(cutLine)
-        return intersect.bounds.top
+        return intersect.bounds.y
     }
 }
 
