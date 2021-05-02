@@ -1,33 +1,22 @@
 package views
 
 import com.soywiz.korge.view.Container
-import com.soywiz.korge.view.View
 import com.soywiz.korge.view.addUpdater
 import com.soywiz.korio.lang.assert
+import models.DisappearingView
 import models.Loadable
 
 abstract class LetterObject(val word: String) : Container(), Loadable {
-    abstract suspend fun initGraphics(): View
-    abstract suspend fun initContours(graphics: View): View
+    abstract suspend fun initObjectView(): DisappearingView
 
-    lateinit var graphics: View
-    lateinit var contours: View
-
-    var graphicWidth: Double = 0.0
-    var boxStep: Double = 0.0
-
-    lateinit var boxes: List<LetterBox>
-
-    init {
-
-    }
+    private lateinit var objectView: DisappearingView
+    private lateinit var boxes: List<LetterBox>
 
     override suspend fun initLoad() {
-        graphics = initGraphics()
-        contours = initContours(graphics)
+        objectView = initObjectView()
+        addChild(objectView)
 
-        graphicWidth = maxOf(graphics.globalBounds.width, contours.globalBounds.width)
-        boxStep = (graphicWidth - LetterBox.SIZE) / (word.length - 1)  // word >= 2
+        val boxStep = (objectView.width - LetterBox.SIZE) / (word.length - 1)  // word >= 2
 
         boxes  = word.mapIndexed { i, ch ->
             val box = LetterBox()
@@ -38,8 +27,7 @@ abstract class LetterObject(val word: String) : Container(), Loadable {
 
         addUpdater {
             val completeness = countCorrectLetters().toDouble() / word.length
-            graphics.alpha = completeness
-            contours.alpha = 1 - completeness
+            objectView.transparency = 1 - completeness
         }
     }
 
