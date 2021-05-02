@@ -17,12 +17,12 @@ import components.SelectCollidingLetterBoxComponent
 import components.StayOnShelfComponent
 import models.putOnShelf
 import objects.MapleTreeObject
+import objects.SingleCharObject
 import objects.TreeObject
 import views.BackpackUI
 import views.MovementAnimator
 import views.Platform
 import views.Player
-import views.addLetter
 
 class GameScene() : Scene() {
     lateinit var platform: Platform
@@ -41,14 +41,38 @@ class GameScene() : Scene() {
         platform = Platform(Rectangle.fromBounds(0, views.virtualHeight * 3/4, views.virtualWidth, views.virtualHeight))
         addChild(platform)
 
-        TreeObject("TREE").apply {
-            initLoad()
-            x = 100.0
+        SingleCharObject('A').apply {
+            x = 80.0
             putOnShelf(platform)
             addTo(this@sceneInit)
         }
 
-        MapleTreeObject("**P**").apply {
+        SingleCharObject('T').apply {
+            x = 120.0
+            putOnShelf(platform)
+            addTo(this@sceneInit)
+        }
+
+        TreeObject("*REE").apply {
+            initLoad()
+            x = 200.0
+            putOnShelf(platform)
+            addTo(this@sceneInit)
+        }
+
+        SingleCharObject('E').apply {
+            x = 400.0
+            putOnShelf(platform)
+            addTo(this@sceneInit)
+        }
+
+        SingleCharObject('L').apply {
+            x = 500.0
+            putOnShelf(platform)
+            addTo(this@sceneInit)
+        }
+
+        MapleTreeObject("M*P**").apply {
             initLoad()
             x = 700.0
             putOnShelf(platform)
@@ -63,9 +87,6 @@ class GameScene() : Scene() {
             addComponent(SelectCollidingLetterBoxComponent(this))
             addTo(this@sceneInit)
         }
-
-        addLetter('A', 300.0, platform)
-        addLetter('B', 350.0, platform)
 
         // must be in front
         sendChildToFront(movementAnimator)

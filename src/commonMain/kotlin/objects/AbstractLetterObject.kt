@@ -8,7 +8,7 @@ import views.DisappearingView
 import views.Letter
 import views.LetterBox
 
-abstract class LetterObject(val word: String) : Container(), Loadable {
+abstract class AbstractLetterObject(val word: String) : Container(), Loadable {
     abstract suspend fun initObjectView(): DisappearingView
 
     private lateinit var objectView: DisappearingView
@@ -18,7 +18,7 @@ abstract class LetterObject(val word: String) : Container(), Loadable {
         objectView = initObjectView()
         addChild(objectView)
 
-        val boxStep = (objectView.width - LetterBox.SIZE) / (word.length - 1)  // word >= 2
+        val boxStep = (objectView.scaledWidth - LetterBox.SIZE) / (word.length - 1)  // word >= 2
 
         boxes  = word.mapIndexed { i, ch ->
             val box = LetterBox()

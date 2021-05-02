@@ -8,9 +8,7 @@ import com.soywiz.korma.geom.shape.buildPath
 import com.soywiz.korma.geom.vector.VectorPath
 import com.soywiz.korma.geom.vector.lineToV
 import com.soywiz.korma.geom.vector.path
-import com.soywiz.korma.geom.vector.rLineTo
 import com.soywiz.korma.geom.vector.rLineToH
-import com.soywiz.korma.geom.vector.rLineToV
 import models.HorizontalShelf
 
 
@@ -20,15 +18,15 @@ class Platform(val rect: Rectangle) : Container(), HorizontalShelf {
 
     override val positionLine: VectorPath = buildPath {
         moveTo(rect.left, rect.top)
-        rLineToH(span)
-        rLineTo(span, step)
-        rLineToH(span / 3)
-        rLineToV(step)
-        rLineToH(span / 3)
-        rLineToV(- step)
-        rLineToH(span / 3)
+        rLineToH(rect.width)
+//        rLineToH(span)
+//        rLineTo(span, step)
+//        rLineToH(span / 3)
+//        rLineToV(step)
+//        rLineToH(span / 3)
+//        rLineToV(- step)
+//        rLineToH(span / 3)
 //        rLineTo(2 * span, -step)
-        rLineToH(2 * span)
     }
 
     init {

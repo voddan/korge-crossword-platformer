@@ -24,7 +24,7 @@ To run natively on Windows, Linux or MacOS follow those
  - [x] 0.3: Player can collect letters. Collected letters are displayed in UI.
  - [x] 0.4: Objects with letters disappear as their letters get collected.
  - [x] 0.5: Objects reappear if correct letters are put into their slots.
- - [ ] 0.6: Objects have sprites; there are 2 types of objects
+ - [x] 0.6: Objects have sprites; there are 2 types of objects
  - [ ] 0.8: One game level with 3 objects and 2-3 obstacles
  - [ ] **1.0**: 1st game level is deployed to [itch.io](https://itch.io/) to get feedback
  - 1.+: menu, 2nd level, basic animations
