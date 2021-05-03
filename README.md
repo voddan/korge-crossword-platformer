@@ -25,18 +25,44 @@ To run natively on Windows, Linux or MacOS follow those
  - [x] 0.4: Objects with letters disappear as their letters get collected.
  - [x] 0.5: Objects reappear if correct letters are put into their slots.
  - [x] 0.6: Objects have sprites; there are 2 types of objects
- - [ ] 0.8: One game level with 3 objects and 2-3 obstacles
+ - [ ] 0.8: One game level with 3 types of objects
  - [ ] **1.0**: 1st game level is deployed to [itch.io](https://itch.io/) to get feedback
  - 1.+: menu, 2nd level, basic animations
- - [ ] 0.1: Player has sprites and movement animation
- - [ ] 0.2: Animation plays when a word is filled in
- - [ ] 0.3: There is a 2nd level after the first one
- - [ ] 0.4: Start menu allows to chose a level
- - 2.+: 3rd level, detailed assets, sounds, polished animations
- - [ ]: Voice reads words when they are correctly filled in
- - [ ]: Player can interact with an appeared object  
+  - [ ] 1.1: Player has sprites and movement animation
+ - [ ] 1.2: Backpack shows letters in a sorted order
+ - [ ] 1.3: Game world scrolls with the player movement
+ - [ ] 1.4: Animation plays when a word is filled in
+ - [ ] 1.5: There is a 2nd level after the first one
+ - [ ] 1.6: Start menu allows to choose a level
+ - [ ] 1.7: Player moves on mouse clicks
+ - [ ] 1.8: Letters can be drag-and-dropped
+ - [ ] 1.9: JS version is monkey-tested and has no visible bugs
+ - [ ] **2.0** Scroller-like version is playable and published to forums 
+ - 2.+: convert to top-down view
+ - [ ] 2.1: Background is a tile map
+ - [ ] 2.2: Player moves in 4 directions using keys
+ - [ ] 2.3: Player animation changes depending on movement direction
+ - [ ] 2.4: Player moves in 4 directions on mouse click
+ - [ ] 2.5: Collecting letters works
+ - [ ] 2.6: Inserting letters into objects works
+ - [ ] 2.7: Objects appear when filled
+ - [ ] 2.8: Camera follows player
+ - [ ] 2.9: There is one top-down level with 3 kinds of objects
+ - [ ] **3.0** Top-down version is playable
+ - 3.+: tutorial, control hints, backstory
+ - [ ] 3.1: Control hints when player doesn't move for a long time
+ - [ ] 3.2: Control hints when player is about to do something for the 1st time (move, collect letter, etc) 
+ - [ ] 3.2: Tutorial level that shows all controls
+ - [ ] 3.3: Backstory sequence inside the tutorial level
+ - [ ] **4.0** Game can be play-tested with children
+ - 4.+: 3rd level, detailed assets, sounds, polished animations
+ - [ ] 4.1: Voice reads words when they are correctly filled in
+ - [ ] 4.2: Player can interact with an appeared object 
+ - [ ] **5.0** Game is polished and released
  
  ## Design Ideas
+ 
+ ### Scroller
  
  Player moves through a left-to-right scroll platformer. 
  Player is able to collect letters of the English alphabet and 
@@ -44,45 +70,57 @@ To run natively on Windows, Linux or MacOS follow those
  The materialised objects interact with the environment and 
  help the Player to overcome obstacles.
  
+ ### Top-down RPG
+ 
+ An wizard stoll names of all objects on Alice's village, 
+ and all objects and animals disappeared. 
+ Alice needs to collect letters scattered through the village 
+ to fill in the names and bring everyone back to existence.
+ 
+ Alice's village include:
+  - field
+  - farm
+  - garden
+  - forest
+  - house
+  - street
+ 
  ### Naming
  
  - Working name: Crossword Platformer
- - Suggested name: Alice in the Word-land
+ - Suggested name: 
+   - Alice in the Word-land
+   - Word-well
+   - No-name village
+   - Nameless
  
- ### Obstacles and Interactions
+ ### Objects
  
- - Get up or down a cliff
-   - ROPE
-   - TREE
-   - LADDER
-   - STAIRS
- - Cross a gap 
-   - BRIDGE
-   - LOG
-   - WATER
- - Pass an animal
-   - SWORD
-   - MEAT
-   - FOOD
-   - GUN
- - Capture an animal
-   - MEAT
-   - FOOD
-   - NUT, NUTS
-   - TRAP
-   - HOOK
-   - NET
- - Build a structure
-   - BRIDGE
-   - STAIRS
-   - LADDER
-   - HOUSE
-   - CAR
-   - BOAT
-   - LAMP
- - Interact with an NPC
-   - GOLD
-   - FOOD
-   - Capturing an animal
-   - Defeating an animal
-   - Building a structure
+- Field
+  - wheat
+  - corn
+  - cow
+  - horse
+  - sheep
+- Farm
+  - pig
+  - piglet
+  - chicken
+  - duck
+  - rabbit
+- Garden
+  - apple (tree)
+- Forest
+  - hare
+  - wolf
+  - maple (tree)
+- House
+  - table
+  - chair
+- Street
+  - post
+  - church
+  - car
+  - fountain
+  - policeman
+  - seller
