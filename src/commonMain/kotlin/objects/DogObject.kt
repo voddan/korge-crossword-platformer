@@ -5,13 +5,13 @@ import com.soywiz.korio.file.std.resourcesVfs
 import views.DisappearingBitmapView
 import views.DisappearingView
 
-class CowObject(val initialWord: String) : AbstractLetterObject("COW") {
+class DogObject(val initialWord: String) : AbstractLetterObject("DOG") {
     override suspend fun initObjectView(): DisappearingView {
-        val sourceImage = resourcesVfs["animals/Cow/walk-left/2-02-00.png"].readBitmap()
-        val view = DisappearingBitmapView(sourceImage.toBMP32())
+        val sourceImage = resourcesVfs["animals/Dog/tail/idle2/corgi-asset-01-02.png"].readBitmap()
+        val view = DisappearingBitmapView(sourceImage.flipX().toBMP32())
         view.initLoad()
         view.scale = 1.5
-        view.y = -view.scaledHeight * 0.85
+        view.y = -view.scaledHeight
         return view
     }
 

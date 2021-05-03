@@ -13,6 +13,7 @@ import components.StayOnShelfComponent
 import models.Loadable
 import models.putOnShelf
 import objects.CowObject
+import objects.DogObject
 import objects.MapleTreeObject
 import objects.SingleCharObject
 import objects.TreeObject
@@ -39,26 +40,37 @@ class GameScene() : Scene() {
         platform = Platform(Rectangle.fromBounds(0, views.virtualHeight * 3/4, views.virtualWidth, views.virtualHeight))
         addChild(platform)
 
-        suspend fun View.putAt(x: Number) {
+        var lastPosX = 0
+
+        suspend fun View.putAt(x: Int) {
             if(this is Loadable) initLoad()
+            lastPosX = x
             this.x = x.toDouble()
             putOnShelf(platform)
             addTo(this@sceneInit)
         }
 
-        SingleCharObject('A').putAt(80)
+        suspend fun View.putAtR(relativeX: Int) {
+            lastPosX += relativeX
+            putAt(lastPosX)
+        }
 
-        SingleCharObject('T').putAt(120)
+        DogObject("DOG").putAtR(80)
 
-        TreeObject("*REE").putAt(200)
+        SingleCharObject('T').putAtR(200)
 
-        SingleCharObject('E').putAt(400)
+        TreeObject("*REE").putAtR(60)
 
-        SingleCharObject('L').putAt(500)
+        SingleCharObject('W').putAtR(200)
+        SingleCharObject('C').putAtR(50)
 
-        CowObject("COW").putAt(700)
+        CowObject("*O*").putAtR(80)
 
-        MapleTreeObject("M*P**").putAt(900)
+        MapleTreeObject("M*P**").putAtR(200)
+
+        SingleCharObject('A').putAtR(300)
+        SingleCharObject('L').putAtR(50)
+
 
         Player().apply {
             x = 50.0
