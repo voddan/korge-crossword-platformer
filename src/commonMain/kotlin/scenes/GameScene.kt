@@ -16,6 +16,7 @@ import components.LetterManipulatorKeyComponent
 import components.SelectCollidingLetterBoxComponent
 import components.StayOnShelfComponent
 import models.putOnShelf
+import objects.CowObject
 import objects.MapleTreeObject
 import objects.SingleCharObject
 import objects.TreeObject
@@ -72,9 +73,16 @@ class GameScene() : Scene() {
             addTo(this@sceneInit)
         }
 
-        MapleTreeObject("M*P**").apply {
+        CowObject("COW").apply {
             initLoad()
             x = 700.0
+            putOnShelf(platform)
+            addTo(this@sceneInit)
+        }
+
+        MapleTreeObject("M*P**").apply {
+            initLoad()
+            x = 900.0
             putOnShelf(platform)
             addTo(this@sceneInit)
         }
