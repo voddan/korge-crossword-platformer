@@ -2,6 +2,8 @@
 
 This game is a 2D platformer that requires solving simple crosswords to complete.
 
+Play it online on [**itch.io**](https://voddan.itch.io/crossword-hero)
+
 ## Running
 
 The project has been tested on JVM, JavaScript and Linux x64.
@@ -27,7 +29,7 @@ To run natively on Windows, Linux or MacOS follow those
  - [x] 0.6: Objects have sprites; there are 2 types of objects
  - [x] 0.8: One game level with 3 types of objects
  - [x] 0.9: Player has a sprite
- - [ ] **1.0**: 1st game level is deployed to [itch.io](https://itch.io/) to get feedback
+ - [x] **1.0**: 1st game level is deployed to [itch.io](https://itch.io/) to get feedback
  - 1.+: menu, 2nd level, basic animations
  - [ ] 1.1: Player has movement animation
  - [ ] 1.2: Backpack shows letters in a sorted order
