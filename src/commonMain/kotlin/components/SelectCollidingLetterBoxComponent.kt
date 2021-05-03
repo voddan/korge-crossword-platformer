@@ -2,6 +2,7 @@ package components
 
 import com.soywiz.korge.baseview.BaseView
 import com.soywiz.korge.component.Component
+import com.soywiz.korge.view.CollisionKind
 import com.soywiz.korge.view.View
 import com.soywiz.korge.view.collidesWith
 import com.soywiz.korge.view.onCollision
@@ -14,7 +15,7 @@ class SelectCollidingLetterBoxComponent(val selector: View) : Component {
     private var selectedBox: LetterBox? = null
 
     init {
-        selector.onCollision(filter = {it is LetterBox}) { box ->
+        selector.onCollision(filter = {it is LetterBox}, kind = CollisionKind.SHAPE) { box ->
             selectedBox = box as LetterBox
         }
     }

@@ -73,6 +73,7 @@ class GameScene() : Scene() {
 
 
         Player().apply {
+            initLoad()
             x = 50.0
             addComponent(StayOnShelfComponent(this, platform))
             addComponent(HorizontalKeyMovementComponent(this))
