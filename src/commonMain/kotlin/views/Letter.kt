@@ -7,8 +7,6 @@ import com.soywiz.korge.view.text
 import com.soywiz.korim.color.Colors
 import com.soywiz.korma.geom.Point
 import com.soywiz.korma.geom.vector.circle
-import models.HorizontalShelf
-import models.putOnShelf
 
 class Letter(val value: Char) : Container() {
     companion object const {
@@ -30,12 +28,4 @@ class Letter(val value: Char) : Container() {
             }
         }
     }
-}
-
-fun Container.addLetter(value: Char, posX: Double, shelf: HorizontalShelf): Letter {
-    val letter = Letter(value)
-    letter.x = posX
-    letter.putOnShelf(shelf)
-    addChild(letter)
-    return letter
 }

@@ -9,8 +9,6 @@ import com.soywiz.korim.vector.StrokeInfo
 import com.soywiz.korma.geom.Point
 import com.soywiz.korma.geom.vector.rect
 import com.soywiz.korma.geom.vector.rectHole
-import models.HorizontalShelf
-import models.putOnShelf
 
 class LetterBox : Container() {
     companion object const {
@@ -40,12 +38,4 @@ class LetterBox : Container() {
         addChild(letter)
         letter.pos = Point(0.0, 0.0)
     }
-}
-
-fun Container.addLetterBox(posX: Double, shelf: HorizontalShelf): LetterBox {
-    val box = LetterBox()
-    box.x = posX
-    box.putOnShelf(shelf)
-    addChild(box)
-    return box
 }

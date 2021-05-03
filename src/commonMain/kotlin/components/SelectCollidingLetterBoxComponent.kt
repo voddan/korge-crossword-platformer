@@ -30,5 +30,3 @@ class SelectCollidingLetterBoxComponent(val selector: View) : Component {
         }
     }
 }
-
-fun SelectCollidingLetterBoxComponent.hasSelection() = (selection() != null)
