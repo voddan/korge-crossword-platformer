@@ -10,6 +10,7 @@ import com.soywiz.korio.file.std.resourcesVfs
 import com.soywiz.korma.geom.vector.circle
 import com.soywiz.korma.geom.vector.rect
 import models.Loadable
+import objects.AbstractLetterObject
 
 class Player : Container(), Loadable {
     companion object const {
@@ -24,14 +25,14 @@ class Player : Container(), Loadable {
 
             fill(Colors.YELLOW) {
                 lineTo(-5.0, 0.0)
-                lineTo(0.0, 20.0)
+                lineTo(0.0, AbstractLetterObject.BOX_MARGIN_Y * 1.5)
                 lineTo(5.0, 0.0)
                 close()
             }
         }
 
         hitShape {
-            rect(-5, 0, 10, 20)
+            rect(-5.0, 0.0, 10.0, AbstractLetterObject.BOX_MARGIN_Y)
         }
     }
 

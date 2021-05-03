@@ -10,6 +10,7 @@ class SingleCharObject(char: Char) : Container() {
 
     init {
         box.insertLetter(Letter(char))
+        box.y = AbstractLetterObject.BOX_MARGIN_Y
         addChild(box)
 
         addUpdater {

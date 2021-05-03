@@ -9,6 +9,10 @@ import views.Letter
 import views.LetterBox
 
 abstract class AbstractLetterObject(val word: String) : Container(), Loadable {
+    companion object const {
+        val BOX_MARGIN_Y = 10.0
+    }
+
     abstract suspend fun initObjectView(): DisappearingView
 
     private lateinit var objectView: DisappearingView
@@ -23,6 +27,7 @@ abstract class AbstractLetterObject(val word: String) : Container(), Loadable {
         boxes  = word.mapIndexed { i, ch ->
             val box = LetterBox()
             box.x = boxStep * i
+            box.y = BOX_MARGIN_Y
             addChild(box)
             box
         }
