@@ -32,7 +32,7 @@ To run natively on Windows, Linux or MacOS follow those
  - [x] **1.0**: 1st game level is deployed to [itch.io](https://itch.io/) to get feedback
  - 1.+: menu, 2nd level, basic animations
  - [x] 1.1: Player has movement animation
- - [ ] 1.2: Backpack shows letters in a sorted order
+ - [x] 1.2: Backpack shows letters in a sorted order
  - [ ] 1.3: Game world scrolls with the player movement
  - [ ] 1.4: Animation plays when a word is filled in
  - [ ] 1.5: There is a 2nd level after the first one
