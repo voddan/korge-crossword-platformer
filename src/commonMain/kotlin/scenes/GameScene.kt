@@ -6,22 +6,13 @@ import com.soywiz.korge.view.View
 import com.soywiz.korge.view.addTo
 import com.soywiz.korge.view.xy
 import com.soywiz.korma.geom.Rectangle
-import components.HorizontalKeyMovementComponent
 import components.LetterManipulatorKeyComponent
 import components.SelectCollidingLetterBoxComponent
 import components.StayOnShelfComponent
 import models.Loadable
 import models.putOnShelf
-import objects.CowObject
-import objects.DogObject
-import objects.MapleTreeObject
-import objects.SingleCharObject
-import objects.TreeObject
-import views.BackpackUI
-import views.MovementAnimator
-import views.Platform
-import views.Player
-import views.SkyBackgroundView
+import objects.*
+import views.*
 
 class GameScene() : Scene() {
     lateinit var platform: Platform
@@ -76,7 +67,6 @@ class GameScene() : Scene() {
             initLoad()
             x = 50.0
             addComponent(StayOnShelfComponent(this, platform))
-            addComponent(HorizontalKeyMovementComponent(this))
             addComponent(LetterManipulatorKeyComponent(this, backpack, movementAnimator))
             addComponent(SelectCollidingLetterBoxComponent(this))
             addTo(this@sceneInit)

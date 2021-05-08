@@ -1,24 +1,26 @@
 package components
 
+import com.soywiz.klock.TimeSpan
 import com.soywiz.korev.Key
-import com.soywiz.korev.KeyEvent
-import com.soywiz.korge.baseview.BaseView
-import com.soywiz.korge.component.KeyComponent
+import com.soywiz.korge.component.UpdateComponentWithViews
+import com.soywiz.korge.view.View
 import com.soywiz.korge.view.Views
-import views.Player
+import views.MovementAnimationView
 
-class HorizontalKeyMovementComponent(val player: Player) : KeyComponent{
-    override val view: BaseView = player
+class HorizontalKeyMovementComponent(override val view: View, val animation: MovementAnimationView) : UpdateComponentWithViews {
+    override fun update(views: Views, dt: TimeSpan) {
+        when {
+            views.keys.pressing(Key.LEFT) -> {
+                animation.state = MovementAnimationView.State.WALK
+                animation.direction = MovementAnimationView.Direction.LEFT
+            }
+            views.keys.pressing(Key.RIGHT) -> {
+                animation.state = MovementAnimationView.State.WALK
+                animation.direction = MovementAnimationView.Direction.RIGHT
+            }
+            else -> animation.state = MovementAnimationView.State.IDLE
+        }
 
-    override fun Views.onKeyEvent(event: KeyEvent) {
-        player.state = Player.State.IDLE
-        if(input.keys[Key.RIGHT]) {
-            player.state = Player.State.WALK
-            player.direction = Player.Direction.RIGHT
-        }
-        if(input.keys[Key.LEFT]) {
-            player.state = Player.State.WALK
-            player.direction = Player.Direction.LEFT
-        }
+        view.x += animation.state.speed * animation.direction.factor * dt.seconds
     }
 }
