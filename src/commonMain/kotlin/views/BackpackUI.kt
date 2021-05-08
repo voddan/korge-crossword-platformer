@@ -51,8 +51,11 @@ class BackpackUI : Container() {
 
     public fun nextLetterPos(): Point {
         val step = LetterBox.SIZE + MARGIN
-        val letterIndex = childLetters().size
-        return Point(LEFT_MARGIN + letterIndex * step, 0.0)
+        return when(val size = childLetters().size) {
+            0 -> Point(LEFT_MARGIN, 0.0)
+            1 -> Point(LEFT_MARGIN + step, 0.0)
+            else -> Point( 0.5 * (LEFT_MARGIN + size * step), 30.0)
+        }
     }
 
     public fun findLetter(value: Char): Letter? {
