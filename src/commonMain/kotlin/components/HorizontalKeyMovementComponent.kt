@@ -11,7 +11,14 @@ class HorizontalKeyMovementComponent(val player: Player) : KeyComponent{
     override val view: BaseView = player
 
     override fun Views.onKeyEvent(event: KeyEvent) {
-        if(input.keys[Key.RIGHT]) player.x += Player.SPEED
-        if(input.keys[Key.LEFT]) player.x -= Player.SPEED
+        player.state = Player.State.IDLE
+        if(input.keys[Key.RIGHT]) {
+            player.state = Player.State.WALK
+            player.direction = Player.Direction.RIGHT
+        }
+        if(input.keys[Key.LEFT]) {
+            player.state = Player.State.WALK
+            player.direction = Player.Direction.LEFT
+        }
     }
 }
