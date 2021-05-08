@@ -2,10 +2,7 @@ package views
 
 import com.soywiz.klock.TimeSpan
 import com.soywiz.klock.milliseconds
-import com.soywiz.korge.view.Container
-import com.soywiz.korge.view.SpriteAnimation
-import com.soywiz.korge.view.graphics
-import com.soywiz.korge.view.hitShape
+import com.soywiz.korge.view.*
 import com.soywiz.korim.color.Colors
 import com.soywiz.korim.format.readBitmapSlice
 import com.soywiz.korio.file.std.resourcesVfs
@@ -14,9 +11,12 @@ import com.soywiz.korma.geom.vector.circle
 import com.soywiz.korma.geom.vector.rect
 import components.HorizontalKeyMovementComponent
 import models.Loadable
+import models.Movement
 import objects.AbstractLetterObject
 
 class Player : Container(), Loadable {
+    val movement = Movement()
+
     init {
         graphics {
             fill(Colors.BLACK) {
@@ -34,11 +34,15 @@ class Player : Container(), Loadable {
         hitShape {
             rect(-5.0, 0.0, 10.0, AbstractLetterObject.BOX_MARGIN_Y)
         }
+
+        addUpdater { dTime ->
+            x += movement.speedFactor() * 100 * dTime.seconds
+        }
     }
 
     override suspend fun initLoad() {
         val sprite = MovementAnimationView(
-            Anchor(0.5, 0.8),
+            movement, Anchor(0.5, 0.8),
             loadSpriteAnimation("characters/Archer/Stand", spriteCount = 10, timePerFrame = 150.milliseconds),
             loadSpriteAnimation("characters/Archer/Run", spriteCount = 10, timePerFrame = 80.milliseconds)
         )
@@ -46,7 +50,7 @@ class Player : Container(), Loadable {
         addChild(sprite)
         sprite.scale = 0.2
 
-        addComponent(HorizontalKeyMovementComponent(this, sprite))
+        addComponent(HorizontalKeyMovementComponent(this, movement))
     }
 }
 

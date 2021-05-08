@@ -5,22 +5,22 @@ import com.soywiz.korev.Key
 import com.soywiz.korge.component.UpdateComponentWithViews
 import com.soywiz.korge.view.View
 import com.soywiz.korge.view.Views
-import views.MovementAnimationView
+import models.Direction
+import models.Movement
+import models.State
 
-class HorizontalKeyMovementComponent(override val view: View, val animation: MovementAnimationView) : UpdateComponentWithViews {
+class HorizontalKeyMovementComponent(override val view: View, val movement: Movement) : UpdateComponentWithViews {
     override fun update(views: Views, dt: TimeSpan) {
         when {
             views.keys.pressing(Key.LEFT) -> {
-                animation.state = MovementAnimationView.State.WALK
-                animation.direction = MovementAnimationView.Direction.LEFT
+                movement.state = State.WALK
+                movement.direction = Direction.LEFT
             }
             views.keys.pressing(Key.RIGHT) -> {
-                animation.state = MovementAnimationView.State.WALK
-                animation.direction = MovementAnimationView.Direction.RIGHT
+                movement.state = State.WALK
+                movement.direction = Direction.RIGHT
             }
-            else -> animation.state = MovementAnimationView.State.IDLE
+            else -> movement.state = State.IDLE
         }
-
-        view.x += animation.state.speed * animation.direction.factor * dt.seconds
     }
 }
