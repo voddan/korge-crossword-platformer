@@ -10,8 +10,8 @@ import com.soywiz.korma.geom.IPoint
 import com.soywiz.korma.geom.Point
 import kotlinx.coroutines.Dispatchers
 
-class MovementAnimator : Container() {
-    public fun moveViewTo(view: View, globalPos: IPoint, doAfter: (View) -> Unit = {}) {
+class TranslateViewAnimator : Container() {
+    public fun translateViewTo(view: View, globalPos: IPoint, doAfter: (View) -> Unit = {}) {
         val oldPos = view.globalPos
         addChild(view)
 
@@ -26,10 +26,13 @@ class MovementAnimator : Container() {
     }
 }
 
-fun MovementAnimator.moveViewToParent(view: View, parent: Container,
-                                      dPos: Point = Point(0.0, 0.0),
-                                      doAfter: (View) -> Unit = {}) {
-    moveViewTo(view, parent.globalPos + dPos) {
+fun TranslateViewAnimator.translateViewToParent(
+        view: View,
+        parent: Container,
+        dPos: Point = Point(0.0, 0.0),
+        doAfter: (View) -> Unit = {}
+) {
+    translateViewTo(view, parent.globalPos + dPos) {
         parent.addChild(view)
         view.pos = dPos
         doAfter(view)

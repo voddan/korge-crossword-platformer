@@ -20,7 +20,7 @@ class GameScene() : Scene() {
     override suspend fun Container.sceneInit() {
         SkyBackgroundView(Rectangle(0, 0, views.virtualWidth, views.virtualHeight)).also { addChild(it) }
 
-        val movementAnimator = MovementAnimator()
+        val movementAnimator = TranslateViewAnimator()
         addChild(movementAnimator)
 
         val backpack = BackpackUI().apply {

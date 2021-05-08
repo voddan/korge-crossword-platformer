@@ -5,13 +5,9 @@ import com.soywiz.korev.KeyEvent
 import com.soywiz.korge.baseview.BaseView
 import com.soywiz.korge.component.KeyComponent
 import com.soywiz.korge.view.Views
-import views.BackpackUI
-import views.LetterBox
-import views.MovementAnimator
-import views.Player
-import views.moveViewToParent
+import views.*
 
-class LetterManipulatorKeyComponent(val player: Player, val backpack: BackpackUI, val movementAnimator: MovementAnimator) : KeyComponent {
+class LetterManipulatorKeyComponent(val player: Player, val backpack: BackpackUI, val translateViewAnimator: TranslateViewAnimator) : KeyComponent {
     override val view: BaseView = player
 
     private val boxSelector = SelectCollidingLetterBoxComponent(player).also { player.addComponent(it) }
@@ -31,7 +27,7 @@ class LetterManipulatorKeyComponent(val player: Player, val backpack: BackpackUI
 
     private fun sendToBackpack(box: LetterBox?) {
         val letter = box?.letter ?: return
-        movementAnimator.moveViewToParent(letter, backpack, dPos = backpack.nextLetterPos())
+        translateViewAnimator.translateViewToParent(letter, backpack, dPos = backpack.nextLetterPos())
     }
 
     private fun swapWithBackpack(selectedBox: LetterBox?, newValue: Char) {
@@ -39,9 +35,9 @@ class LetterManipulatorKeyComponent(val player: Player, val backpack: BackpackUI
         if (selectedBox.value == newValue) return
         val backpackLetter = backpack.findLetter(newValue) ?: return
 
-        movementAnimator.moveViewToParent(backpackLetter, selectedBox)
+        translateViewAnimator.translateViewToParent(backpackLetter, selectedBox)
         if (!selectedBox.isEmpty) {
-            movementAnimator.moveViewToParent(selectedBox.letter!!, backpack, dPos = backpack.nextLetterPos())
+            translateViewAnimator.translateViewToParent(selectedBox.letter!!, backpack, dPos = backpack.nextLetterPos())
         }
     }
 }
