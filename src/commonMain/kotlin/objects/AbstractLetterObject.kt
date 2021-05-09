@@ -25,7 +25,7 @@ abstract class AbstractLetterObject(val word: String) : Container(), Loadable {
         val boxStep = (objectView.scaledWidth - LetterBox.SIZE) / (word.length - 1)  // word >= 2
 
         boxes  = word.mapIndexed { i, ch ->
-            val box = LetterBox()
+            val box = LetterBox(correctValue = ch)
             box.x = boxStep * i
             box.y = BOX_MARGIN_Y
             addChild(box)
