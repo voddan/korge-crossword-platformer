@@ -10,12 +10,13 @@ import com.soywiz.korma.geom.Anchor
 import com.soywiz.korma.geom.vector.circle
 import com.soywiz.korma.geom.vector.rect
 import components.HorizontalKeyMovementComponent
+import components.HorizontalMouseMovementComponent
 import models.Loadable
 import models.Movement
 import objects.AbstractLetterObject
 
 class Player : Container(), Loadable {
-    val movement = Movement()
+    private val movement = Movement(this, walkSpeed = 100.0)
 
     init {
         graphics {
@@ -36,7 +37,7 @@ class Player : Container(), Loadable {
         }
 
         addUpdater { dTime ->
-            x += movement.speedFactor() * 100 * dTime.seconds
+            movement.updatePosition(dTime)
         }
     }
 
@@ -51,6 +52,7 @@ class Player : Container(), Loadable {
         sprite.scale = 0.2
 
         addComponent(HorizontalKeyMovementComponent(this, movement))
+        addComponent(HorizontalMouseMovementComponent(this, movement))
     }
 }
 

@@ -13,10 +13,12 @@ class HorizontalKeyMovementComponent(override val view: View, val movement: Move
     override fun update(views: Views, dt: TimeSpan) {
         when {
             views.keys.pressing(Key.LEFT) -> {
+                movement.onAutopilot = false
                 movement.state = State.WALK
                 movement.direction = Direction.LEFT
             }
             views.keys.pressing(Key.RIGHT) -> {
+                movement.onAutopilot = false
                 movement.state = State.WALK
                 movement.direction = Direction.RIGHT
             }
