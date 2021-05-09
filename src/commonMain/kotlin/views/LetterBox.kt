@@ -28,11 +28,13 @@ class LetterBox(val correctValue: Char? = null) : Container() {
             rect(0.0, 0.0, SIZE, -HITBOX_HEIGHT)
         }
 
-        onValueChange(::value) {_, value ->
-            when(value) {
-                null -> graphics.drawLetterBox(Colors.BLACK, thickness = 1.5)
-                correctValue -> graphics.drawLetterBox(Colors.BLUE, thickness = 2.5)
-                else -> graphics.drawLetterBox(Colors.RED, thickness = 2.5)
+        if(correctValue != null) {
+            onValueChange(::value) {_, value ->
+                when(value) {
+                    null -> graphics.drawLetterBox(Colors.BLACK, thickness = 1.5)
+                    correctValue -> graphics.drawLetterBox(Colors.BLUE, thickness = 2.5)
+                    else -> graphics.drawLetterBox(Colors.RED, thickness = 2.5)
+                }
             }
         }
     }
