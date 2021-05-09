@@ -33,13 +33,13 @@ To run natively on Windows, Linux or MacOS follow those
  - 1.+: menu, 2nd level, basic animations
  - [x] 1.1: Player has movement animation
  - [x] 1.2: Backpack shows letters in a sorted order
- - [ ] 1.3: Game world scrolls with the player movement
- - [ ] 1.4: Animation plays when a word is filled in
- - [ ] 1.5: There is a 2nd level after the first one
- - [ ] 1.6: Start menu allows to choose a level
- - [x] 1.7: Player moves on mouse clicks
- - [x] 1.8: Letters can be drag-and-dropped
- - [x] 1.9: JS version is monkey-tested and has no visible bugs
+ - [x] 1.3: Player moves on mouse clicks
+ - [x] 1.4: Letters can be drag-and-dropped
+ - [x] 1.5: JS version is monkey-tested and has no visible bugs
+ - [ ] 1.6: Game world scrolls with the player movement
+ - [ ] 1.7: Animation plays when a word is filled in
+ - [ ] 1.8: There is a 2nd level after the first one
+ - [ ] 1.9: Start menu allows to choose a level
  - [ ] **2.0** Scroller-like version is playable and published to forums 
  - 2.+: convert to top-down view
  - [ ] 2.1: Background is a tile map
