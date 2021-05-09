@@ -6,9 +6,7 @@ import com.soywiz.korge.view.View
 import com.soywiz.korge.view.addTo
 import com.soywiz.korge.view.xy
 import com.soywiz.korma.geom.Rectangle
-import components.LetterManipulatorKeyComponent
-import components.SelectCollidingLetterBoxComponent
-import components.StayOnShelfComponent
+import components.*
 import models.Loadable
 import models.putOnShelf
 import objects.*
@@ -69,6 +67,8 @@ class GameScene() : Scene() {
             addComponent(StayOnShelfComponent(this, platform))
             addComponent(LetterManipulatorKeyComponent(this, backpack, movementAnimator))
             addComponent(SelectCollidingLetterBoxComponent(this))
+            addComponent(HorizontalKeyMovementComponent(this, movement))
+            addComponent(HorizontalMouseMovementComponent(this, movement))
             addTo(this@sceneInit)
         }
 

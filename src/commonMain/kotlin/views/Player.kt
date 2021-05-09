@@ -9,14 +9,12 @@ import com.soywiz.korio.file.std.resourcesVfs
 import com.soywiz.korma.geom.Anchor
 import com.soywiz.korma.geom.vector.circle
 import com.soywiz.korma.geom.vector.rect
-import components.HorizontalKeyMovementComponent
-import components.HorizontalMouseMovementComponent
 import models.Loadable
 import models.Movement
 import objects.AbstractLetterObject
 
 class Player : Container(), Loadable {
-    private val movement = Movement(this, walkSpeed = 100.0)
+    public val movement = Movement(this, walkSpeed = 100.0)
 
     init {
         graphics {
@@ -50,9 +48,6 @@ class Player : Container(), Loadable {
 
         addChild(sprite)
         sprite.scale = 0.2
-
-        addComponent(HorizontalKeyMovementComponent(this, movement))
-        addComponent(HorizontalMouseMovementComponent(this, movement))
     }
 }
 
