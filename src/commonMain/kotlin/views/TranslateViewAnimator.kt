@@ -32,7 +32,7 @@ fun TranslateViewAnimator.translateViewToParent(
         dPos: Point = Point(0.0, 0.0),
         doAfter: (View) -> Unit = {}
 ) {
-    translateViewTo(view, parent.globalPos + dPos) {
+    translateViewTo(view, parent.localToGlobal(dPos)) {
         parent.addChild(view)
         view.pos = dPos
         doAfter(view)
