@@ -68,7 +68,7 @@ class GameScene() : Scene() {
             addComponent(LetterManipulatorKeyComponent(this, backpack, movementAnimator))
             addComponent(SelectCollidingLetterBoxComponent(this))
             addComponent(HorizontalKeyMovementComponent(this, movement))
-            addComponent(HorizontalMouseMovementComponent(this, movement))
+            addComponent(HorizontalMouseMovementComponent(platform, movement))
             addTo(this@sceneInit)
         }
 
