@@ -1,6 +1,5 @@
 package views
 
-import com.soywiz.klock.milliseconds
 import com.soywiz.korge.tween.get
 import com.soywiz.korge.tween.tween
 import com.soywiz.korge.view.Container
@@ -19,10 +18,10 @@ class BackpackUI : Container() {
         const val LEFT_MARGIN = 15.0
         const val MARGIN = Letter.SIZE * 0.8
         const val POS_EPSILON = 0.1
-        val LETTER_MOVE_TIME = 300.milliseconds
+        val LETTER_MOVE_TIME = Letter.RETURN_TO_POS_TIME
     }
 
-    private fun childLetters(): List<Letter> = children.filterIsInstance<Letter>()
+    private fun childLetters(): List<Letter> = children.filterIsInstance<Letter>().filter { it.state == Letter.State.PARKED }
     private fun supposedLetterPos(): Map<Letter, Point> = childLetters()
             .sortedBy { it.value }
             .mapIndexed { index, letter -> letter to Point(LEFT_MARGIN + index * (LetterBox.SIZE + MARGIN), 0.0) }

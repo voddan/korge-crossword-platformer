@@ -38,7 +38,7 @@ To run natively on Windows, Linux or MacOS follow those
  - [ ] 1.5: There is a 2nd level after the first one
  - [ ] 1.6: Start menu allows to choose a level
  - [x] 1.7: Player moves on mouse clicks
- - [ ] 1.8: Letters can be drag-and-dropped
+ - [x] 1.8: Letters can be drag-and-dropped
  - [ ] 1.9: JS version is monkey-tested and has no visible bugs
  - [ ] **2.0** Scroller-like version is playable and published to forums 
  - 2.+: convert to top-down view

@@ -73,6 +73,7 @@ class GameScene() : Scene() {
         }
 
         // must be in front
+        sendChildToFront(backpack)
         sendChildToFront(movementAnimator)
     }
 }
